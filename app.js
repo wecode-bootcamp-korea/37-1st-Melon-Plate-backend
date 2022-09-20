@@ -1,29 +1,36 @@
-require("dotenv").config;
+require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
-const routes = require("./routes");
+
+const routes = require("./src/routes");
+const { database } = require("./src/models/dataSource");
+const PORT = process.env.PORT;
 
 const app = express();
-const PORT = process.env.PORT;
 
 app.use(cors());
 app.use(morgan("combined"));
 app.use(express.json());
 app.use(routes);
+app.use("/uploads", express.static("uploads"));
 
 app.get("/ping", (res, req) => {
   res.statusCode(200).json({ message: err.message });
-}); // health check
+});
 
 const start = async () => {
-  try {
-    app.listen(PORT, () => console.log(`Server is listening on ${PORT}`));
-  } 
-  catch (err) {
-    console.err(err);
-  }
+  await database
+    .initialize()
+    .then(() => {
+      console.log("Data Source has been initialized!");
+    })
+    .catch((err) => {
+      console.error(`Error during Data Source initialization, ${err}`);
+    });
+
+  app.listen(PORT, () => console.log(`Server is listening on ${PORT}`));
 };
 
 start();

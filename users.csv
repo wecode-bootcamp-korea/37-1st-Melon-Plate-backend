@@ -1,0 +1,11 @@
+id,userId,nickname,password,prifileImg,gender,age,created_at
+1,Rebekah,Johnson,dnddow@14,uploads/testimg.jpg,male,40,2022-09-20-14:00
+2,Fabian,Predovic,wecode$37,uploads/testimg.jpg,female,30,2022-09-20-14:00
+3,Elenor,Gottlieb,samsung99*&,uploads/testimg.jpg,male,20,2022-09-20-14:00
+4,engsoo,kimes89,mango&$23,uploads/testimg.jpg,male,10,2022-09-20-14:00
+5,kyungen,leeke90,mango&$23,uploads/testimg.jpg,female,10,2022-09-20-14:00
+6,songhwa,sungjh99,mango&$23,uploads/testimg.jpg,male,10,2022-09-20-14:00
+7,jiwon,kimjw987,mango&$23,uploads/testimg.jpg,female,10,2022-09-20-14:00
+8,jiyoon,shinjy46,mango&$23,uploads/testimg.jpg,male,10,2022-09-20-14:00
+9,janghyun,namjh23,mango&$23,uploads/testimg.jpg,male,10,2022-09-20-14:00
+10,junhyung,chojh25,mango&$23,uploads/testimg.jpg,male,10,2022-09-20-14:00
