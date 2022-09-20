@@ -27,18 +27,20 @@ function csvToNode(csv) {
     return storeArray;
 }
 
-// const store = csvToNode(stores);
+const store = csvToNode(stores);
 const user = csvToNode(users);
 
 // user.map(use => {
 //     const storeArray = [];
     
 //     for (let i = 0; i < store.length; i++) {
-//         if (store[i].user_id === use.id) {
+//         if (store[i].id === use.id) {
 //             storeArray.push(store[i]);
 //         }
 //     }
-//     use.post = posted;
+//     use.post = storeArray;
 // })
 
-console.log(util.inspect(user, false, 2, true));
+// console.log(util.inspect(user, false, null, true));
+console.log(store);
+console.log(user);
