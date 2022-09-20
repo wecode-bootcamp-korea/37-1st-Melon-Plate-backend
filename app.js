@@ -15,7 +15,7 @@ app.use(routes);
 
 app.get("/ping", (res, req) => {
   res.statusCode(200).json({ message: err.message });
-}); // health check
+});
 
 const start = async () => {
   try {
