@@ -1,7 +1,8 @@
 const { userService } = require("../services");
 const { catchAsync } = require("../middlewares/");
 
-const signUp = catchAsync(async (req, res, next) => {
+const getUserSignUp = catchAsync(async (req, res, next) => {
+  console.log(req)
   let profileImg = "null";
   const {
     body: { userId, nickname, password, age, gender },
@@ -16,7 +17,7 @@ const signUp = catchAsync(async (req, res, next) => {
     throw error;
   }
 
-  await userService.signUp(
+  await userService.getUserSignUp(
     userId,
     nickname,
     gender,
@@ -28,6 +29,19 @@ const signUp = catchAsync(async (req, res, next) => {
   res.status(201).json({ message: `Welcome ${nickname}!` });
 });
 
+const signIn = catchAsync(async (req, res, next) => {
+  console.log("asdasdasdasdsad======",req.body)
+  const { userId, password } = req.body;
+  console.log(userId, password)
+  if ( !userId || !password ) {
+      const err = new Error("아이디나 비밀번호가 입력되지않았습니다");
+      err.statusCode = 400;
+      throw err
+  }
+  const result = await userService.signIn( userId, password );
+  return res.status(200).json(result);
+})
+
 module.exports = {
-  signUp,
-};
+  getUserSignUp, signIn
+  };

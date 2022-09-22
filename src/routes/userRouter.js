@@ -1,8 +1,15 @@
-const express = require("express");
-const router = express.Router();
-const { upload } = require("../../util/multer")
+const router = require("express").Router();
+
 const { userController } = require("../controllers");
+const { uploadFiles } = require("../middlewares");
+const { upload } = require("../util/multer")
 
-router.post("/signup", upload.single('image'), userController.signUp);
+router
+  .route("/signup")
+  .post(upload.single("profileImg"), userController.getUserSignUp);
 
-module.exports = router;
+router
+.route("/signin")
+.post(upload.single("profileImg"),userController.signIn)
+
+module.exports = router

@@ -1,9 +1,9 @@
 -- migrate:up
-CREATE TABLE menu (
+CREATE TABLE menus (
     id int not null auto_increment primary key,
     name varchar(50) NOT NULL,
-    priceß decimal NOT NULL
+    price DECIMAL(10, 2) NOT NULL
 )
 
 -- migrate:down
-DROP TABLE menu
+DROP TABLE menus

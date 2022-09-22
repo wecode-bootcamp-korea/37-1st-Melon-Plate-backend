@@ -1,5 +1,5 @@
 -- migrate:up
-CREATE TABLE storeInfo (
+CREATE TABLE store_infos (
     id int not null auto_increment primary key,
     store_id INT NOT NULL,
     info_id INT NOT NULL,
@@ -9,4 +9,4 @@ CREATE TABLE storeInfo (
 )
 
 -- migrate:down
-DROP TABLE storeInfo;
+DROP TABLE store_infos;

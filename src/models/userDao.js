@@ -1,4 +1,4 @@
-const  database = require("./dataSource");
+const  {database} = require("./dataSource");
 
 const createUser = async (
   userId,
@@ -39,6 +39,24 @@ const createUser = async (
   return newUser;
 };
 
+const signIn = async ( userId ) => {
+  try {
+      const [user] = await database.query(
+          `SELECT
+              *
+          FROM users
+          WHERE user_id = ? `,
+          [userId]
+      );
+      return user;
+  } catch (err) {
+      const error = new Error(`INVALID_DATA_INPUT`);
+      error.statusCode = 500;
+      throw error;
+  }
+}
+
+
 module.exports = {
-  createUser,
+  createUser, signIn
 };

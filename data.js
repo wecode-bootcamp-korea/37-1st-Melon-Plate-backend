@@ -1,11 +1,28 @@
 require('dotenv').config();
 const fs = require('fs');
-const  database  = require("./src/models/dataSource");
+const {database}  = require("./src/models/dataSource");
+
+
+const start = async () => {
+    await database
+      .initialize()
+      .then(() => {
+        console.log("Data Source has been initialized!");
+      })
+      .catch((err) => {
+        console.error(`Error during Data Source initialization, ${err}`);
+      });
+  
+    app.listen(PORT, () => console.log(`Server is listening on ${PORT}`));
+  };
+  
+  start()
 
 const users = fs.readFileSync(
     "users.csv",
     "utf-8"
 );
+
 
 function csvToNode(csv) {
     const rows = csv.split("\n");
@@ -25,18 +42,12 @@ function csvToNode(csv) {
 
 const user = csvToNode (users);
 for (i in user) {
-    
-      console.log(userId,nickname,password,gender,profileImg,age)
-      let pushUser =  async (
-        userId,
-        nickname,
-        password,
-        gender,
-        profileImg,
-        age
+      
+           let pushUser =  async (   
       ) => {
      try { 
-      const userPut =  await database.query(
+        let {userId,nickname,password,gender,profileImg,age} =user[i]; 
+         await database.query(
           `INSERT INTO users(
                 user_id,
                 nickname,
@@ -58,15 +69,15 @@ for (i in user) {
 
         console.log("============",userPut);
      }catch(err) {
-      const error = new Error(`INVALID_DATA_INPUT`);
+      const error = new Error(err,"==================캐치된에러");
       error.statusCode = 500;
       console.log(error)
       throw error;
       
   }
-       
+   
         
 }
-pushUser()
+pushUser ();
 }
 // console.log(util.inspect(user, false, null, true));
