@@ -12,7 +12,7 @@ const createStore = async (
   closed_day_id
 ) => {
   if (!(await userDao.signIn(user_id).admin)) {
-    const err = new Error(`사장이되서돌아와라`);
+    const err = new Error(`not admin user`);
     err.statusCode = 400;
     throw err;
   }
