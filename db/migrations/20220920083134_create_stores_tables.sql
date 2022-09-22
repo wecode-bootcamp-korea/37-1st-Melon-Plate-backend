@@ -10,8 +10,10 @@ CREATE TABLE stores(
     closed_time time null,
     closed_day_id int null,
     price_range varchar(50) null,
+    admin_user_id int null,
     create_at timestamp not null default current_timestamp,
-    CONSTRAINT closed_day_id_fkey FOREIGN KEY (closed_day_id) REFERENCES days (id)
+    CONSTRAINT closed_day_id_fkey FOREIGN KEY (closed_day_id) REFERENCES days (id),
+    CONSTRAINT admin_user_id_fkey FOREIGN KEY (admin_user_id) REFERENCES users (id)
 )
 
 -- migrate:down

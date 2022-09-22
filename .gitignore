@@ -5,5 +5,6 @@ db/schema.sql
 /uploads
 stores.csv
 users.csv
+reviews.csv
 dummyData.js
 .DS_Store

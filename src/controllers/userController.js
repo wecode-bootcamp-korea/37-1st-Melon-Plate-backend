@@ -1,5 +1,5 @@
 const { userService } = require("../services");
-const { catchAsync } = require("../utils/catchAsync");
+const { catchAsync } = require("../middlewares");
 
 const getUserSignUp = catchAsync(async (req, res, next) => {
   const {
