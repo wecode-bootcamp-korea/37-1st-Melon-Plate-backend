@@ -1,5 +1,5 @@
 -- migrate:up
-CREATE TABLE reviewImages(
+CREATE TABLE review_images(
     id int not null auto_increment primary key,
     review_id int not null,
     image varchar(400) not null,
@@ -7,4 +7,4 @@ CREATE TABLE reviewImages(
 )
 
 -- migrate:down
-DROP TABLE reviewImages;
+DROP TABLE review_images;

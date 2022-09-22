@@ -1,4 +1,4 @@
-const { database } = require("./dataSource");
+const database = require("./dataSource");
 
 const createUser = async (
   userId,
@@ -23,7 +23,7 @@ const createUser = async (
     throw error;
   }
 
-  const newUser = await database.query(
+  const result = await database.query(
     `INSERT INTO users(
       user_id,
       nickname,
@@ -36,7 +36,7 @@ const createUser = async (
     [userId, nickname, gender, hashedPw, profileImg, age]
   );
 
-  return newUser;
+  return result;
 };
 
 module.exports = {

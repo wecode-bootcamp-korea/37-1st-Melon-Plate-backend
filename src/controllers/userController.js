@@ -1,21 +1,22 @@
 const { userService } = require("../services");
-const { catchAsync } = require("../middlewares/");
+const { catchAsync } = require("../utils/catchAsync");
 
 const getUserSignUp = catchAsync(async (req, res, next) => {
-  let profileImg = "null";
   const {
     body: { userId, nickname, password, age, gender },
     file,
   } = req;
 
-  if (file) profileImg = file.path;
+  let profileImg = (file) ? file.path : "NULL";
+
+  console.log(userId, nickname, password, age, gender, profileImg);
 
   if (!userId || !nickname || !password || !age) {
     const error = new Error("Please write your Info");
     error.statusCode = 400;
     throw error;
   }
-
+  
   await userService.getUserSignUp(
     userId,
     nickname,

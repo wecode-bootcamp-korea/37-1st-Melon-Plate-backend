@@ -1,9 +1,4 @@
-id,name,image,description,adress,tel,openTime,closedTime,closed_day_id,price_range,created_at
-1,gimbabbn,http://pds19.egloos.com/pds/201103/14/08/c0026408_4d7da08f10898.jpg,sdfgsdfgsdfg,sdafasdf
-2,gimbabp,http://pds19.egloos.com/pds/201103/14/08/c0026408_4d7da08f10898.jpg,sdfgsdfgs,asdfasd,2345,2022-09-21-00:00,2022-09-21-00:00,sunday,50,2022-09-21-00:00
-3,gimbabo,http://pds19.egloos.com/pds/201103/14/08/c0026408_4d7da08f10898.jpg,dsdfgdsfg,zxcvzxcv,2345,2022-09-21-00:00,2022-09-21-00:00,monday,50,2022-09-21-00:00
-4,gimbabj,http://pds19.egloos.com/pds/201103/14/08/c0026408_4d7da08f10898.jpg,stwertwr,bcvxxcvbxcv,2345,2022-09-21-00:00,2022-09-21-00:00,tuesday,50,2022-09-21-00:00
-5,gimbabop,http://pds19.egloos.com/pds/201103/14/08/c0026408_4d7da08f10898.jpg,vcbncvbne,grthgrdghfdg,010,2022-09-21-00:00,2022-09-21-00:00,wednesday,50,2022-09-21-00:00
+id,name,image,description,address,tel,open_time,closedTime,closed_day_id,price_range,created_at
 6,gimbabi,http://pds19.egloos.com/pds/201103/14/08/c0026408_4d7da08f10898.jpg,ghfjfghj,rtyretyerty,010,2022-09-21-00:00,2022-09-21-00:00,thursday,40,2022-09-21-00:00
 7,gimbaby,http://pds19.egloos.com/pds/201103/14/08/c0026408_4d7da08f10898.jpg,fhfdghjdfh,4tyertqasrf,010,2022-09-21-00:00,2022-09-21-00:00,friday,30,2022-09-21-00:00
 8,gimbabe,http://pds19.egloos.com/pds/201103/14/08/c0026408_4d7da08f10898.jpg,rtyrtey,sadfasdfas,010,2022-09-21-00:00,2022-09-21-00:00,saturday,30,2022-09-21-00:00

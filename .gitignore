@@ -3,3 +3,7 @@ node_modules/
 db/schema.sql
 .vscode
 /uploads
+stores.csv
+users.csv
+dummyData.js
+.DS_Store

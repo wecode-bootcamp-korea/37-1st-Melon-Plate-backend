@@ -5,7 +5,8 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const routes = require("./src/routes");
-const { database } = require("./src/models/dataSource");
+const { database } = require("./src/models");
+
 const PORT = process.env.PORT;
 
 const app = express();
@@ -16,8 +17,8 @@ app.use(express.json());
 app.use(routes);
 app.use("/uploads", express.static("uploads"));
 
-app.get("/ping", (res, req) => {
-  res.statusCode(200).json({ message: err.message });
+app.get("/ping", (req, res, next) => {
+  res.status(200).json({ message: "pong" });
 });
 
 const start = async () => {
