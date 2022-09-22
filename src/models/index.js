@@ -1,9 +1,7 @@
-const userDao = require("./userDao");
-const storeDao = require("./storeDao");
-const commentDao = require("./commentDao");
+const  userDao  = require("./userDao");
+const  database  = require("./dataSource");
 
 module.exports = {
   userDao,
-  storeDao,
-  commentDao,
+  database,
 };
