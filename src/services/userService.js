@@ -15,7 +15,8 @@ const getUserSignUp = async (
   gender,
   password,
   profileImg,
-  age
+  age,
+  admin
 ) => {
   validateId(userId);
   validateNickname(nickname);
@@ -30,7 +31,8 @@ const getUserSignUp = async (
     gender,
     hashedPw,
     profileImg,
-    age
+    age,
+    admin
   );
 };
 
@@ -45,10 +47,11 @@ const signIn = async ( userId, password ) => {
       err.statusCode = 400; 
       throw err;
   }
-  const KEY = process.env.KEY;
-  const jwtToken = jwt.sign(id, KEY);
+
+  const jwtToken = jwt.sign({ id: user.id, user_id: user.user_id },process.env.KEY);
   const result = {
-      accessToken : jwtToken 
+      accessToken : jwtToken,
+      
        }
   return result
 }

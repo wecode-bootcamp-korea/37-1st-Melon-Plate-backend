@@ -1,15 +1,15 @@
 const { userService } = require("../services");
-const { catchAsync } = require("../middlewares/");
+const { catchAsync } = require("../util/catchAsync");
 
 const getUserSignUp = catchAsync(async (req, res, next) => {
   console.log(req)
-  let profileImg = "null";
+  let profileImg = null;
   const {
-    body: { userId, nickname, password, age, gender },
+    body: { userId, nickname, password, age, gender, admin },
     file,
   } = req;
 
-  if (file) profileImg = file.path;
+  if (file) profileImg = file.location;
 
   if (!userId || !nickname || !password || !age) {
     const error = new Error("Please write your Info");
@@ -23,7 +23,8 @@ const getUserSignUp = catchAsync(async (req, res, next) => {
     gender,
     password,
     profileImg,
-    age
+    age,
+    admin
   );
 
   res.status(201).json({ message: `Welcome ${nickname}!` });

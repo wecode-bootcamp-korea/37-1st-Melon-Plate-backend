@@ -1,9 +1,9 @@
 const { uploadFiles } = require("./uploadFiles");
 const { validators } = require("./validators");
-const { catchAsync } = require("./catchAsync");
+const { auth } = require("./auth");
 
 module.exports = {
   uploadFiles,
   validators,
-  catchAsync,
+  auth,
 };

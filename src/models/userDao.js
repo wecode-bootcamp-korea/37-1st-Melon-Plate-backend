@@ -6,7 +6,8 @@ const createUser = async (
   gender,
   hashedPw,
   profileImg,
-  age
+  age,
+  admin
 ) => {
   const user = await database.query(
     `SELECT 
@@ -23,20 +24,21 @@ const createUser = async (
     throw error;
   }
 
-  const newUser = await database.query(
+  const result = await database.query(
     `INSERT INTO users(
       user_id,
       nickname,
       gender,
       password,
       profile_image,
-      age
-    ) VALUES (?, ?, ?, ?, ?, ?)
+      age,
+      admin
+    ) VALUES (?, ?, ?, ?, ?, ?,?)
     `,
-    [userId, nickname, gender, hashedPw, profileImg, age]
+    [userId, nickname, gender, hashedPw, profileImg, age, admin]
   );
 
-  return newUser;
+  return result;
 };
 
 const signIn = async ( userId ) => {

@@ -2,10 +2,13 @@ const jwt = require("jsonwebtoken");
 
 const accessToken = async (req, res, next) => {
   try {
+    console.log("============",req.body,req.headers,"============================================")
       const token = req.headers.authorization;
-      const access = jwt.verify(token, process.env.KEY);
-      const user_id = access.userId;
-      req.body.user_id = user_id;
+      const access = jwt.verify(token, process.env.KEY)
+      console.log("=================엑세스",access)
+      const {id,user_id} = access
+      req.body.id = id
+      req.body.user_id = user_id
       return next();
   } catch (err) {
     console.log("토큰에러")
