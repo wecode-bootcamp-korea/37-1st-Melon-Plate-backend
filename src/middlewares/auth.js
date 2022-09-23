@@ -5,9 +5,9 @@ const accessToken = async (req, res, next) => {
       const token = req.headers.authorization;
       const access = jwt.verify(token, process.env.KEY)
       const {id,user_id,adminTF} = access
-      req.body.id = id
-      req.body.user_id = user_id
-      req.body.admin = adminTF
+      req.id = id
+      req.user_id = user_id
+      req.admin = adminTF
       return next();
   } 
   catch (err) {
