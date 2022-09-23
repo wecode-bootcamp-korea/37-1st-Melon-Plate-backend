@@ -2,14 +2,16 @@ const { mainDao } = require("../models");
 
 const getSearchResult = async (query) => {
   const searchResult = await mainDao.getSearchResult(query);
-  const avgCount = await mainDao.getAvgCount();
+  const averageRate = await mainDao.getRateAverage();
+  const countReviews = await mainDao.getTheNumberOfReviews();
 
   for (let i in searchResult) {
-    for (let j in avgCount) {
-      if (searchResult[i].id === avgCount[j].id) {
-        searchResult[i].rateAvg = avgCount[j].rateAvg;
-        searchResult[i].reviewCount = avgCount[j].reviewCount;
+    for (let j in averageRate) {
+      if (searchResult[i].id === averageRate[j].id) {
+        searchResult[i].rate_average = averageRate[j].rate_average;
       }
+      if (searchResult[i].id === countReviews[j].id)
+      searchResult[i].reviews_count = countReviews[j].reviews_count;
     }
   }
 
