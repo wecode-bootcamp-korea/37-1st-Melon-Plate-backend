@@ -1,7 +1,7 @@
 -- migrate:up
 CREATE TABLE categories(
     id int not null auto_increment primary key,
-    info varchar(50) not null
+    category varchar(30) not null UNIQUE
 )
 
 -- migrate:down
