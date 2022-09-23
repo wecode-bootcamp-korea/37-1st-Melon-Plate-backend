@@ -11,14 +11,16 @@ const createStore = async (
   open_time,
   closed_time,
   closed_day_id,
-  image
-) => {
+  image,
+  ) => {  
   console.log("==========스토어서비스",user_id)
-  let adminTF = await userDao.signIn(user_id)
-  if (!adminTF.admin) {
-    const err = new Error(`not admin user`);
+  
+  const adminTF = await userDao.signIn(user_id).admin
+    async (adminTF) => {if (!adminTF){
+    const err = new Error(`사장이 되어 돌아와라`);
     err.statusCode = 400;
     throw err;
+  }
   }
   const createStore = await storeDao.createStore(
     name,
@@ -33,5 +35,8 @@ const createStore = async (
   );
   return await createStore;
 };
+
+
+
 
 module.exports = { createStore };

@@ -48,7 +48,7 @@ const signIn = async ( userId, password ) => {
       throw err;
   }
 
-  const jwtToken = jwt.sign({ id: user.id, user_id: user.user_id },process.env.KEY);
+  const jwtToken = jwt.sign({ id: user.id, user_id: user.user_id, adminTF: user.admin},process.env.KEY);
   const result = {
       accessToken : jwtToken,
       
