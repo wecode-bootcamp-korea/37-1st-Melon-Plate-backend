@@ -6,7 +6,7 @@ const { upload } = require("../middlewares/multer")
 const { accessToken } = require("../middlewares/auth");
 
 router
-  .route("/create")
+  .route("/admin")
   .post(upload.single("image"), accessToken, storeController.createStore);
 
 module.exports = router

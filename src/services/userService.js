@@ -24,7 +24,7 @@ const getUserSignUp = async (
 
   const saltRounds = 10;
   const hashedPw = await bcrypt.hash(password, saltRounds);
-
+  
   return await userDao.createUser(
     userId,
     nickname,
@@ -51,12 +51,17 @@ const signIn = async ( userId, password ) => {
   const jwtToken = jwt.sign({ id: user.id, user_id: user.user_id, adminTF: user.admin},process.env.KEY);
   const result = {
       accessToken : jwtToken,
-      
+      admin : user.admin
        }
   return result
 }
 
+const getAdmin = async (userId) => {
+  const result = await userDao.getAdmin(userId);
+  return 
+}
+
 
 module.exports = {
-  getUserSignUp, signIn
+  getUserSignUp, signIn, getAdmin,
 };

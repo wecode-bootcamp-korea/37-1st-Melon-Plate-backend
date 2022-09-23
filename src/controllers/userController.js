@@ -43,6 +43,18 @@ const signIn = catchAsync(async (req, res, next) => {
   return res.status(200).json(result);
 })
 
+const getAdmin = catchAsync(async (req,res,next) => {
+  
+  let {admin,userId,user_id} = req.body
+  if (!admin) {
+    const err = new Error("관리자 계정 로그인이 필요합니다")
+    err.statusCode = 400;
+    throw err
+  }
+  const result = await userService.getAdmin( userId );
+  return res.status(200).json(result);
+})
+
 module.exports = {
-  getUserSignUp, signIn
+  getUserSignUp, signIn, getAdmin
   };
