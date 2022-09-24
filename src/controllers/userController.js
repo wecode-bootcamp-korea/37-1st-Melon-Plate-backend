@@ -16,7 +16,6 @@ const getUserSignUp = catchAsync(async (req, res, next) => {
     error.statusCode = 400;
     throw error;
   }
-
   await userService.getUserSignUp(
     userId,
     nickname,

@@ -3,4 +3,5 @@ node_modules/
 db/schema.sql
 .vscode
 /uploads
-dummydata.js
+/dummy
+.DS_Store

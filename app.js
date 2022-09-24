@@ -5,7 +5,9 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const routes = require("./src/routes");
-const { database } = require("./src/models/dataSource");
+const { database } = require("./src/models");
+const { globalErrorHandler } = require('./src/middlewares');
+
 const PORT = process.env.PORT;
 
 const app = express();
@@ -15,14 +17,21 @@ app.use(morgan("tiny"));
 app.use(express.json());
 app.use(routes);
 app.use("/uploads", express.static("uploads"));
-app.use((err, req, res, next)=> {
-  console.log("====app.js에서의에러컨트롤",err)
-  res.status(err.statusCode || 500).json({ message: err.message });
-})
 
-app.get("/ping", (req, res) => {
+app.get("/ping", (req, res, next) => {
   res.status(200).json({ message: "pong" });
 });
+
+app.all('*', (req, res, next) => {
+	const err = new Error(`Can't fine ${req.originalUrl} on this server!`)
+
+	err.statusCode = 404;
+	
+	res.status(statusCode).send()
+	next(err)
+})
+
+app.use(globalErrorHandler);
 
 const start = async () => {
   await database

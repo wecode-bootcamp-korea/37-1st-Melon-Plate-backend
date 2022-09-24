@@ -2,7 +2,7 @@ const router = require("express").Router();
 
 const { userController } = require("../controllers");
 const { uploadFiles } = require("../middlewares");
-const { upload } = require("../util/multer")
+const { upload } = require("../middlewares")
 
 router
   .route("/signup")

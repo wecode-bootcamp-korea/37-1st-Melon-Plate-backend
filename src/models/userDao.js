@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const  {database} = require("./dataSource");
+=======
+const database = require("./dataSource");
+>>>>>>> 4605aa1c3ce1baa7c3337fb00fbeaaaf19f3ce6f
 
 const createUser = async (
   userId,
@@ -23,7 +27,11 @@ const createUser = async (
     throw error;
   }
 
+<<<<<<< HEAD
   const newUser = await database.query(
+=======
+  const result = await database.query(
+>>>>>>> 4605aa1c3ce1baa7c3337fb00fbeaaaf19f3ce6f
     `INSERT INTO users(
       user_id,
       nickname,
@@ -36,6 +44,7 @@ const createUser = async (
     [userId, nickname, gender, hashedPw, profileImg, age]
   );
 
+<<<<<<< HEAD
   return newUser;
 };
 
@@ -59,4 +68,11 @@ const signIn = async ( userId ) => {
 
 module.exports = {
   createUser, signIn
+=======
+  return result;
+};
+
+module.exports = {
+  createUser,
+>>>>>>> 4605aa1c3ce1baa7c3337fb00fbeaaaf19f3ce6f
 };
