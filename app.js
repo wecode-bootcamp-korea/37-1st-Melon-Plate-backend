@@ -5,7 +5,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const routes = require("./src/routes");
-const { database } = require("./src/models");
+const {database} = require("./src/models");
 const { globalErrorHandler } = require('./src/middlewares');
 
 const PORT = process.env.PORT;
@@ -16,7 +16,7 @@ app.use(cors());
 app.use(morgan("tiny"));
 app.use(express.json());
 app.use(routes);
-app.use("/uploads", express.static("uploads"));
+// app.use("/uploads", express.static("uploads"));
 
 app.get("/ping", (req, res, next) => {
   res.status(200).json({ message: "pong" });
