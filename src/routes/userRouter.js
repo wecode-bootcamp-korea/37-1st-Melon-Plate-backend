@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 const { userController } = require("../controllers");
-const { uploadFiles } = require("../middlewares");
+
 const { upload } = require("../middlewares/multer")
 const { accessToken } = require("../middlewares/auth");
 
