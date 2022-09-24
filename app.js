@@ -6,7 +6,7 @@ const morgan = require("morgan");
 
 const routes = require("./src/routes");
 const { database } = require("./src/models");
-const { globalErrorHandler } = require('./src/middlewares');
+const { globalErrorHandler } = require("./src/middlewares");
 
 const PORT = process.env.PORT;
 
@@ -22,14 +22,17 @@ app.get("/ping", (req, res, next) => {
   res.status(200).json({ message: "pong" });
 });
 
-app.all('*', (req, res, next) => {
-	const err = new Error(`Can't fine ${req.originalUrl} on this server!`)
+app.all("*", (req, res, next) => {
+  const err = new Error(`Can't fine ${req.originalUrl} on this server!`);
 
-	err.statusCode = 404;
-	
-	res.status(statusCode).send()
-	next(err)
-})
+  res
+    .status(404)
+    .send({
+      message: `Can't fine ${req.originalUrl} on this server or your ${req.method} method is incorrect!`,
+    });
+  
+  next(err);
+});
 
 app.use(globalErrorHandler);
 
