@@ -3,14 +3,13 @@ const { catchAsync } = require("../middlewares/");
 
 const getUserSignUp = catchAsync(async (req, res, next) => {
   console.log(req)
-  let profileImg = "null";
   const {
     body: { userId, nickname, password, age, gender },
     file,
   } = req;
-
-  if (file) profileImg = file.path;
-
+  
+  let profileImg = (file) ? file.path : NULL
+ 
   if (!userId || !nickname || !password || !age) {
     const error = new Error("Please write your Info");
     error.statusCode = 400;
