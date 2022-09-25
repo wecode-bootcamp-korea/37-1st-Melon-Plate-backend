@@ -1,5 +1,5 @@
 const { storeService } = require("../services");
-const { catchAsync } = require("../util/catchAsync");
+const { catchAsync } = require("../middlewares");
 
 const createStore = catchAsync(async (req, res, next) => {
     
