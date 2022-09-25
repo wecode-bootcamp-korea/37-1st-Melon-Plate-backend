@@ -1,4 +1,4 @@
-const { database } = require("./dataSource");
+const database  = require("./dataSource");
 
 const createStore = async (
   name,

@@ -2,7 +2,7 @@ const { userService } = require("../services");
 const { catchAsync } = require("../middlewares/");
 
 const getUserSignUp = catchAsync(async (req, res, next) => {
-  console.log(req)
+  
   const {
     body: { userId, nickname, password, age, gender },
     file,

@@ -1,4 +1,4 @@
-const  {database} = require("./dataSource");
+const  database = require("./dataSource");
 
 const createUser = async (
   userId,
@@ -48,6 +48,7 @@ const signIn = async ( userId ) => {
           WHERE user_id = ? `,
           [userId]
       );
+      console.log("유저===========",user)
       return user;
   } catch (err) {
       const error = new Error(`INVALID_DATA_INPUT`);

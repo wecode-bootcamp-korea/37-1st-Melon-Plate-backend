@@ -10,6 +10,6 @@ router
 
 router
 .route("/signin")
-.post(upload.single("profileImg"),userController.signIn)
+.post(userController.signIn)
 
 module.exports = router

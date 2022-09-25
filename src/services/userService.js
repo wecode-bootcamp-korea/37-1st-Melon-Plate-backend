@@ -38,14 +38,16 @@ const signIn = async ( userId, password ) => {
   const checkHash = async (password, hashedPassword) => {
       return await bcrypt.compare(password, hashedPassword);
   }
+  console.log("=============해쉬",checkHash)
   const checkPassword = await checkHash(password, user.password);
   if(!checkPassword) {
       const err = new Error(`유저 정보가 일치하지 않습니다.`);
       err.statusCode = 400; 
       throw err;
   }
-  const KEY = process.env.KEY;
-  const jwtToken = jwt.sign(id, KEY);
+    const JWT_KEY = process.env.KEY;
+    console.log(JWT_KEY)
+  const jwtToken = jwt.sign(userId,JWT_KEY);
   const result = {
       accessToken : jwtToken 
        }
