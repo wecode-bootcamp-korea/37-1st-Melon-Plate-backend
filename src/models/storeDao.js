@@ -7,22 +7,26 @@ const createStore = async (
   tel,
   open_time,
   closed_time,
-  closed_day_id
+  closed_day_id,
+  id,
+  image
 ) => {
 
   try {
     return await database.query(
-      `INSERT INTO stroes(
+      `INSERT INTO stores(
             name, 
             description,
             address,
             tel,
             open_time,
             closed_time,
-            closed_day_id
-          ) VALUES (?, ? ,?, ?, ?, ?, ?);
+            closed_day_id,
+            admin_user_id,
+            image
+          ) VALUES (?, ? ,?, ?, ?, ?, ?, ?, ?);
           `,
-      [name, description, address, tel, open_time, closed_time, closed_day_id]
+      [name, description, address, tel, open_time, closed_time, closed_day_id,id,image]
     );
   } catch (err) {
     console.log(err);

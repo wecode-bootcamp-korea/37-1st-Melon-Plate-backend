@@ -1,11 +1,12 @@
 const { storeService } = require("../services");
-const { catchAsync } = require("../middlewares/");
+const { catchAsync } = require("../util/catchAsync");
 
 const createStore = catchAsync(async (req, res, next) => {
-    console.log(req.body,req.file)
+    
 
     const {
         body :{
+            id,
             user_id,
             name, 
             description,
@@ -17,8 +18,8 @@ const createStore = catchAsync(async (req, res, next) => {
         },
         file
     } = req
-    
-    let image = (file) ? file.location : NULL;
+    console.log("컨트롤러==================",user_id,file)
+    let image = (file) ? file.location : "NULL"
   
     if (!name || !description || !address || !tel ) {
       const error = new Error("필수정보를 확인해주세요");
@@ -27,6 +28,7 @@ const createStore = catchAsync(async (req, res, next) => {
     }
   
     await storeService.createStore(
+        id,
         user_id,
         name, 
         description,
@@ -34,10 +36,11 @@ const createStore = catchAsync(async (req, res, next) => {
         tel,
         open_time,
         closed_time,
-        closed_day_id
+        closed_day_id,
+        image
     );
   
-    res.status(201).json({ message: `Welcome ${nickname}!` });
+    res.status(201).json({ message: `${name} created!` });
   });
 
   module.exports = {

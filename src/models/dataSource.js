@@ -1,5 +1,3 @@
-
-
 const { DataSource } = require("typeorm");
 
 const database = new DataSource({

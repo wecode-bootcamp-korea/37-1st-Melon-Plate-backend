@@ -14,7 +14,8 @@ const getUserSignUp = async (
   gender,
   password,
   profileImg,
-  age
+  age,
+  admin
 ) => {
   validateId(userId);
   validateNickname(nickname);
@@ -22,14 +23,15 @@ const getUserSignUp = async (
 
   const saltRounds = 10;
   const hashedPw = await bcrypt.hash(password, saltRounds);
-
+  
   return await userDao.createUser(
     userId,
     nickname,
     gender,
     hashedPw,
     profileImg,
-    age
+    age,
+    admin
   );
 };
 
@@ -38,7 +40,7 @@ const signIn = async ( userId, password ) => {
   const checkHash = async (password, hashedPassword) => {
       return await bcrypt.compare(password, hashedPassword);
   }
-  console.log("=============해쉬",checkHash)
+
   const checkPassword = await checkHash(password, user.password);
   if(!checkPassword) {
       const err = new Error(`유저 정보가 일치하지 않습니다.`);
@@ -46,15 +48,21 @@ const signIn = async ( userId, password ) => {
       throw err;
   }
     const JWT_KEY = process.env.KEY;
-    console.log(JWT_KEY)
+    
   const jwtToken = jwt.sign(userId,JWT_KEY);
   const result = {
-      accessToken : jwtToken 
+      accessToken : jwtToken,
+      admin : user.admin
        }
   return result
 }
 
+const getAdmin = async (userId) => {
+  const result = await userDao.getAdmin(userId);
+  return 
+}
+
 
 module.exports = {
-  getUserSignUp, signIn
+  getUserSignUp, signIn, getAdmin,
 };
