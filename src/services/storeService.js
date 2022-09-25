@@ -10,8 +10,9 @@ const createStore = async (
   tel,
   open_time,
   closed_time,
-  closed_day_id,
+  closed_day_id, 
   image,
+  category_id
   ) => {  
   console.log("==========스토어서비스",user_id)
   
@@ -23,18 +24,33 @@ const createStore = async (
   }
   }
   const createStore = await storeDao.createStore(
-    name,
+  name,
   description,
   address,
   tel,
   open_time,
   closed_time,
-  closed_day_id,
   id,
-  image
+  image,
+  category_id
   );
-  return await createStore;
+  console.log(createStore)
 };
+///////////////////////////////////////
+// if (closed_day_id) {
+// const closed_day = closed_day_id.toString(2)
+// if (closed_day[0] == "1") {closed_day_String.unshift("일")}
+// if (closed_day[1] == "1") {closed_day_String.unshift("토")}
+// if (closed_day[2] == "1") {closed_day_String.unshift("금")}
+// if (closed_day[3] == "1") {closed_day_String.unshift("목")}
+// if (closed_day[4] == "1") {closed_day_String.unshift("수")}
+// if (closed_day[5] == "1") {closed_day_String.unshift("화")}
+// if (closed_day[6] == "1") {closed_day_String.unshift("월")}
+// }
+
+
+
+///////////////////////////////////////
 
 
 

@@ -7,9 +7,9 @@ const createStore = async (
   tel,
   open_time,
   closed_time,
-  closed_day_id,
   id,
-  image
+  image,
+  category_id
 ) => {
 
   try {
@@ -21,13 +21,14 @@ const createStore = async (
             tel,
             open_time,
             closed_time,
-            closed_day_id,
             admin_user_id,
-            image
+            image,
+            category_id
           ) VALUES (?, ? ,?, ?, ?, ?, ?, ?, ?);
           `,
-      [name, description, address, tel, open_time, closed_time, closed_day_id,id,image]
+      [name, description, address, tel, open_time, closed_time, id,image,category_id]
     );
+    
   } catch (err) {
     console.log(err);
     const error = new Error("INVALID_DATA_INPUT");
@@ -35,6 +36,13 @@ const createStore = async (
     throw error;
   }
 };
+
+///////////////////////////////////
+// const makeOffday = async (closed_day_id, store_id) = {
+
+// }
+
+///////////////////////////////////
 
 module.exports = {
     createStore,

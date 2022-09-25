@@ -49,7 +49,7 @@ const signIn = async ( userId, password ) => {
   }
     const JWT_KEY = process.env.KEY;
     
-  const jwtToken = jwt.sign(userId,JWT_KEY);
+  const jwtToken = jwt.sign({id:user.id, user_id:user.user_id, admin:user.admin}, JWT_KEY);
   const result = {
       accessToken : jwtToken,
       admin : user.admin
