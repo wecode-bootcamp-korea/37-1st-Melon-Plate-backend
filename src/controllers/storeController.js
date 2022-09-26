@@ -55,12 +55,12 @@ const updateStore = catchAsync(async (req, res, next) => {
       closed_day_id,
       category_id,
     },
-    query: { store },
+    params: { storeId },
     file,
     id,
     user_id,
   } = req;
-  let store_id = store;
+  let store_id = storeId;
 
   let image = file ? file.location : "NULL";
 
