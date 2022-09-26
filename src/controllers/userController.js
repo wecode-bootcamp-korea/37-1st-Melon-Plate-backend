@@ -41,13 +41,13 @@ const signIn = catchAsync(async (req, res, next) => {
 });
 
 const getAdmin = catchAsync(async (req, res, next) => {
-  let { admin, userId, user_id } = req.body;
+  let { admin, id, user_id } = req;
   if (!admin) {
     const err = new Error("관리자 계정 로그인이 필요합니다");
     err.statusCode = 400;
     throw err;
   }
-  const result = await userService.getAdmin(userId);
+  const result = await userService.getAdmin(id);
   return res.status(200).json(result);
 });
 

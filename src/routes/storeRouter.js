@@ -13,4 +13,6 @@ router
   .route("/update")
   .patch(upload.single("image"), accessToken, storeController.updateStore);
 
+  
+
 module.exports = router;

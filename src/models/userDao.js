@@ -59,14 +59,15 @@ const signIn = async ( userId ) => {
   }
 }
 
-const getAdmin = async (userId) => {
+const getAdmin = async (id) => {
+  console.log(id)
   const result = await database.query(
     `SELECT 
             *
         FROM stores, users
         WHERE users.id = stores.admin_user_id AND users.id=?
         `,
-    [userId]
+    [id]
    
   );
   return result;

@@ -57,9 +57,9 @@ const signIn = async ( userId, password ) => {
   return result
 }
 
-const getAdmin = async (userId) => {
-  const result = await userDao.getAdmin(userId);
-  return 
+const getAdmin = async (id) => {
+  const result = await userDao.getAdmin(id);
+  return result
 }
 
 
