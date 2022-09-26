@@ -25,9 +25,6 @@ app.get("/ping", (req, res, next) => {
 app.all('*', (req, res, next) => {
 	const err = new Error(`Can't fine ${req.originalUrl} on this server!`)
 
-	err.statusCode = 404;
-	
-	res.status(statusCode).send()
 	next(err)
 })
 

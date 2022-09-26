@@ -12,9 +12,12 @@ const catchAsync = (asyncFn) => {
 const globalErrorHandler = (err, req, res, next) => {
   console.error(err.stack);
 
-  err.statusCode = err.statusCode || 500;
-
-  res.status(err.statusCode).json({ message: err.message });
+  res
+    .status(err.status || 500)
+    .json({ 
+      message: err.message,
+      error: err
+    });
 };
 
 module.exports = { catchAsync, globalErrorHandler };

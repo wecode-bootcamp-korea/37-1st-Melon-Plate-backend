@@ -9,9 +9,7 @@ const getUserSignUp = catchAsync(async (req, res, next) => {
 
   let profileImg = (file) ? file.path : "NULL";
 
-  console.log(userId, nickname, password, age, gender, profileImg);
-
-  if (!userId || !nickname || !password || !age) {
+  if ( !userId || !nickname || !password || !age ) {
     const error = new Error("Please write your Info");
     error.statusCode = 400;
     throw error;
