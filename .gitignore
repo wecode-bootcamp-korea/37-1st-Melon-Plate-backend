@@ -4,5 +4,5 @@ db/schema.sql
 .vscode
 /uploads
 /dummy
+dummyData.js
 .DS_Store
-dummydata.js

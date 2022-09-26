@@ -29,6 +29,7 @@ app.all("*", (req, res, next) => {
   err.statusCode = 404;
 
   res.status(statusCode).send();
+
   next(err);
 });
 
