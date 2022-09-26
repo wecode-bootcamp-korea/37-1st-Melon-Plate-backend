@@ -6,11 +6,11 @@ const { upload } = require("../middlewares");
 const { accessToken } = require("../middlewares");
 
 router
-  .route("/create")
+  .route("/")
   .post(upload.single("image"), accessToken, storeController.createStore);
 
 router
-  .route("/update")
+  .route("/:storeId")
   .patch(upload.single("image"), accessToken, storeController.updateStore);
 
   

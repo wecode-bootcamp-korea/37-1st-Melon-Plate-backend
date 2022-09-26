@@ -14,7 +14,6 @@ const accessToken = async (req, res, next) => {
   req.id = id;
   req.user_id = user_id;
   req.admin = admin;
-  console.log("토큰아이디=",req.id,"토큰유저=", req.user_id,"관리자여부=", req.admin);
   return next();
 };
 

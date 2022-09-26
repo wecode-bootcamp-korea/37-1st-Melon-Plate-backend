@@ -2,12 +2,13 @@ const { userService } = require("../services");
 const { catchAsync } = require("../middlewares");
 
 const getUserSignUp = catchAsync(async (req, res, next) => {
+  
   const {
     body: { userId, nickname, password, age, gender, admin },
     file,
   } = req;
-
-  let profileImg = file ? file.path : NULL;
+  
+  let profileImg = file ? file.location : NULL;
 
   if (!userId || !nickname || !password || !age) {
     const error = new Error("Please write your Info");
@@ -28,9 +29,9 @@ const getUserSignUp = catchAsync(async (req, res, next) => {
 });
 
 const signIn = catchAsync(async (req, res, next) => {
-  console.log("asdasdasdasdsad======", req.body);
+
   const { userId, password } = req.body;
-  console.log(userId, password);
+
   if (!userId || !password) {
     const err = new Error("아이디나 비밀번호가 입력되지않았습니다");
     err.statusCode = 400;
