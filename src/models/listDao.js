@@ -11,6 +11,7 @@ const getSeperatedList = async (
    SELECT distinct
     stores.id,
     stores.address,
+    stores.description,
     stores.name,
     stores.image,
     FORMAT(AVG(reviews.rate),2) AS rate_average
