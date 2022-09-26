@@ -19,7 +19,6 @@ app.use(routes);
 app.use("/uploads", express.static("uploads"));
 
 app.get("/ping", (req, res, next) => {
-  console.log(req.query);
   res.status(200).json({ message: "pong" });
 });
 
