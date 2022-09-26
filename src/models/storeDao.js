@@ -80,7 +80,7 @@ const updateStore = async (
   id,
   store_id
 ) => {
-  console.log(name, store_id);
+
   await database.query(
     `UPDATE stores
       SET name=?, 
