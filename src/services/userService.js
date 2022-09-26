@@ -8,7 +8,7 @@ const {
   validatePassword,
 } = require("../middlewares/validators");
 
-const getUserSignUp = async(
+const getUserSignUp = async (
   userId,
   nickname,
   gender,
@@ -34,5 +34,5 @@ const getUserSignUp = async(
 };
 
 module.exports = {
-  getUserSignUp
+  getUserSignUp,
 };
