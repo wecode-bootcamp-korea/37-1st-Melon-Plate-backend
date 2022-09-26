@@ -9,4 +9,8 @@ router
   .route("/create")
   .post(upload.single("image"), accessToken, storeController.createStore);
 
-module.exports = router
+router
+  .route("/update")
+  .patch(upload.single("image"), accessToken, storeController.updateStore);
+
+module.exports = router;

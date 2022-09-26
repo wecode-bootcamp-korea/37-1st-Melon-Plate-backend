@@ -5,8 +5,8 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const routes = require("./src/routes");
-const {database} = require("./src/models");
-const { globalErrorHandler } = require('./src/middlewares');
+const { database } = require("./src/models");
+const { globalErrorHandler } = require("./src/middlewares");
 
 const PORT = process.env.PORT;
 
@@ -19,18 +19,18 @@ app.use(routes);
 app.use("/uploads", express.static("uploads"));
 
 app.get("/ping", (req, res, next) => {
-  console.log(req.query)
+  console.log(req.query);
   res.status(200).json({ message: "pong" });
 });
 
-app.all('*', (req, res, next) => {
-	const err = new Error(`Can't fine ${req.originalUrl} on this server!`)
+app.all("*", (req, res, next) => {
+  const err = new Error(`Can't fine ${req.originalUrl} on this server!`);
 
-	err.statusCode = 404;
-	
-	res.status(statusCode).send()
-	next(err)
-})
+  err.statusCode = 404;
+
+  res.status(statusCode).send();
+  next(err);
+});
 
 app.use(globalErrorHandler);
 

@@ -2,14 +2,13 @@ const { userService } = require("../services");
 const { catchAsync } = require("../middlewares");
 
 const getUserSignUp = catchAsync(async (req, res, next) => {
-  
   const {
     body: { userId, nickname, password, age, gender, admin },
     file,
   } = req;
-  
-  let profileImg = (file) ? file.path : NULL
- 
+
+  let profileImg = file ? file.path : NULL;
+
   if (!userId || !nickname || !password || !age) {
     const error = new Error("Please write your Info");
     error.statusCode = 400;
@@ -29,30 +28,31 @@ const getUserSignUp = catchAsync(async (req, res, next) => {
 });
 
 const signIn = catchAsync(async (req, res, next) => {
-  console.log("asdasdasdasdsad======",req.body)
+  console.log("asdasdasdasdsad======", req.body);
   const { userId, password } = req.body;
-  console.log(userId, password)
-  if ( !userId || !password ) {
-      const err = new Error("아이디나 비밀번호가 입력되지않았습니다");
-      err.statusCode = 400;
-      throw err
-  }
-  const result = await userService.signIn( userId, password );
-  return res.status(200).json(result);
-})
-
-const getAdmin = catchAsync(async (req,res,next) => {
-  
-  let {admin,userId,user_id} = req.body
-  if (!admin) {
-    const err = new Error("관리자 계정 로그인이 필요합니다")
+  console.log(userId, password);
+  if (!userId || !password) {
+    const err = new Error("아이디나 비밀번호가 입력되지않았습니다");
     err.statusCode = 400;
-    throw err
+    throw err;
   }
-  const result = await userService.getAdmin( userId );
+  const result = await userService.signIn(userId, password);
   return res.status(200).json(result);
-})
+});
+
+const getAdmin = catchAsync(async (req, res, next) => {
+  let { admin, userId, user_id } = req.body;
+  if (!admin) {
+    const err = new Error("관리자 계정 로그인이 필요합니다");
+    err.statusCode = 400;
+    throw err;
+  }
+  const result = await userService.getAdmin(userId);
+  return res.status(200).json(result);
+});
 
 module.exports = {
-  getUserSignUp, signIn, getAdmin
-  };
+  getUserSignUp,
+  signIn,
+  getAdmin,
+};
