@@ -10,7 +10,7 @@ router
   .post(upload.single("image"), accessToken, storeController.createStore);
 
 router
-  .route("/")
+  .route("/:storeId")
   .patch(upload.single("image"), accessToken, storeController.updateStore);
 
 module.exports = router;
