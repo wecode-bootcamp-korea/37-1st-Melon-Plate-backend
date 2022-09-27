@@ -13,7 +13,7 @@ const PORT = process.env.PORT;
 const app = express();
 
 app.use(cors());
-app.use(morgan("combined"));
+app.use(morgan("tiny"));
 app.use(express.json());
 app.use(routes);
 app.use("/uploads", express.static("uploads"));
@@ -25,12 +25,10 @@ app.get("/ping", (req, res, next) => {
 app.all("*", (req, res, next) => {
   const err = new Error(`Can't fine ${req.originalUrl} on this server!`);
 
-  res
-    .status(404)
-    .send({
-      message: `Can't fine ${req.originalUrl} on this server or your ${req.method} method is incorrect!`,
-    });
-  
+  err.statusCode = 404;
+
+  res.status(statusCode).send(message: `Can't fine ${req.originalUrl} on this server or your ${req.method} method is incorrect!`);
+
   next(err);
 });
 

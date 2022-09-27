@@ -1,4 +1,4 @@
-const database = require("./dataSource");
+const  database = require("./dataSource");
 
 const createUser = async (
   userId,
@@ -6,7 +6,8 @@ const createUser = async (
   gender,
   hashedPw,
   profileImg,
-  age
+  age,
+  admin
 ) => {
   const user = await database.query(
     `SELECT 
@@ -30,15 +31,57 @@ const createUser = async (
       gender,
       password,
       profile_image,
-      age
-    ) VALUES (?, ?, ?, ?, ?, ?)
+      age,
+      admin
+    ) VALUES (?, ?, ?, ?, ?, ?,?)
     `,
-    [userId, nickname, gender, hashedPw, profileImg, age]
+    [userId, nickname, gender, hashedPw, profileImg, age, admin]
   );
 
   return result;
 };
 
+const getUserById = async ( userId ) => {
+  try {
+      const [user] = await database.query(
+          `SELECT
+              *
+          FROM users
+          WHERE user_id = ? `,
+          [userId]
+      );
+      return user;
+  } catch (err) {
+      const error = new Error(`INVALID_DATA_INPUT`);
+      error.statusCode = 500;
+      throw error;
+  }
+}
+
+const getAdminUser = async (userId) => {
+  const result = await database.query(
+    `SELECT              
+    stores.id, 
+    stores.name, 
+    stores.image, 
+    stores.description, 
+    stores.address, 
+    stores.tel, 
+    stores.open_time, 
+    stores.closed_time, 
+    stores.category_id, 
+    stores.view_count, 
+    stores.create_at         
+    FROM stores         
+    JOIN users ON users.id = stores.admin_user_id
+    WHERE users.id = ?
+        `,
+    [userId]
+   
+  );
+  return result;
+}
+
 module.exports = {
-  createUser,
+  createUser, getUserById, getAdminUser,
 };
