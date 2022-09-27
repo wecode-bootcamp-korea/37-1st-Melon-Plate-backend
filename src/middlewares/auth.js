@@ -10,7 +10,7 @@ const accessToken = async (req, res, next) => {
       return next();
   } 
   catch (err) {
-    console.error("토큰이 없거나 잘못되었습니다");
+    console.error("undefined token information");
 
     return res
       .status(err.statusCode || 400)
