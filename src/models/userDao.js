@@ -58,12 +58,23 @@ const getUserById = async ( userId ) => {
   }
 }
 
-const getAdmin = async (userId) => {
+const getAdminUser = async (userId) => {
   const result = await database.query(
-    `SELECT 
-            *
-        FROM stores, users
-        WHERE users.id = stores.admin_user_id AND users.id=?
+    `SELECT              
+    stores.id, 
+    stores.name, 
+    stores.image, 
+    stores.description, 
+    stores.address, 
+    stores.tel, 
+    stores.open_time, 
+    stores.closed_time, 
+    stores.category_id, 
+    stores.view_count, 
+    stores.create_at         
+    FROM stores         
+    JOIN users ON users.id = stores.admin_user_id
+    WHERE users.id = ?
         `,
     [userId]
    
@@ -72,5 +83,5 @@ const getAdmin = async (userId) => {
 }
 
 module.exports = {
-  createUser, getUserById, getAdmin,
+  createUser, getUserById, getAdminUser,
 };
