@@ -27,7 +27,7 @@ app.all("*", (req, res, next) => {
 
   err.statusCode = 404;
 
-  res.status(statusCode).send(message: `Can't fine ${req.originalUrl} on this server or your ${req.method} method is incorrect!`);
+  res.status(statusCode).send({message: `Can't fine ${req.originalUrl} on this server or your ${req.method} method is incorrect!`});
 
   next(err);
 });
