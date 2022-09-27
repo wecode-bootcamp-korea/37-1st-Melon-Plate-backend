@@ -40,26 +40,10 @@ const createStore = async (
 
   let day = async (store_id) => {
     if (closed_day_id != "NULL") {
-      if (offDay[0] == "1") {
-        await storeDao.makeOffday(7, store_id);
-      }
-      if (offDay[1] == "1") {
-        await storeDao.makeOffday(6, store_id);
-      }
-      if (offDay[2] == "1") {
-        await storeDao.makeOffday(5, store_id);
-      }
-      if (offDay[3] == "1") {
-        await storeDao.makeOffday(4, store_id);
-      }
-      if (offDay[4] == "1") {
-        await storeDao.makeOffday(3, store_id);
-      }
-      if (offDay[5] == "1") {
-        await storeDao.makeOffday(2, store_id);
-      }
-      if (offDay[6] == "1") {
-        await storeDao.makeOffday(1, store_id);
+      for (i in offDay) {
+        if (offDay[i] == "1") {
+          await storeDao.makeOffday(7 - i, store_id);
+        }
       }
     }
   };
@@ -96,32 +80,16 @@ const updateStore = async (
     closed_day_id *= 1;
     const offDay = closed_day_id.toString(2).padStart(7, 0);
 
-    let day = async (store_id) => {
-      if (closed_day_id != "NULL") {
-        if (offDay[0] == "1") {
-          await storeDao.makeOffday(7, store_id);
-        }
-        if (offDay[1] == "1") {
-          await storeDao.makeOffday(6, store_id);
-        }
-        if (offDay[2] == "1") {
-          await storeDao.makeOffday(5, store_id);
-        }
-        if (offDay[3] == "1") {
-          await storeDao.makeOffday(4, store_id);
-        }
-        if (offDay[4] == "1") {
-          await storeDao.makeOffday(3, store_id);
-        }
-        if (offDay[5] == "1") {
-          await storeDao.makeOffday(2, store_id);
-        }
-        if (offDay[6] == "1") {
-          await storeDao.makeOffday(1, store_id);
+  let day = async (store_id) => {
+    if (closed_day_id != "NULL") {
+      for (i in offDay) {
+        if (offDay[i] == "1") {
+          await storeDao.makeOffday(7 - i, store_id);
         }
       }
-    };
-    await day(store_id);
+    }
+  };
+  await day(store_id);
 
 
     let modifyStore = await storeDao.updateStore(
