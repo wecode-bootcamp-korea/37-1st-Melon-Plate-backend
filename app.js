@@ -13,7 +13,7 @@ const PORT = process.env.PORT;
 const app = express();
 
 app.use(cors());
-app.use(morgan("combined"));
+app.use(morgan("tiny"));
 app.use(express.json());
 app.use(routes);
 app.use("/uploads", express.static("uploads"));

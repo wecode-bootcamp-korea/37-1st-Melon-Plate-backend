@@ -9,6 +9,5 @@ const database = new DataSource({
   database: process.env.TYPEORM_DATABASE
 });
 
-module.exports = 
-  database
-// };
+
+module.exports =  database

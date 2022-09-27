@@ -1,19 +1,16 @@
 const jwt = require("jsonwebtoken");
 
-const accessToken = async (req, res, next) => {
+const loginRequired = async (req, res, next) => {
   try {
-    const token = req.headers.authorization;
-    const access = jwt.verify(token, process.env.JWT_KEY);
-    const { id, user_id, adminTF } = access;
-
-    req.id = id;
-    req.user_id = user_id;
-    req.admin = adminTF;
-
-    return next();
+      const token = req.headers.authorization;
+      const access = jwt.verify(token, process.env.KEY)
+      const {id,adminTF} = access
+      req.id = id
+      req.admin = adminTF
+      return next();
   } 
   catch (err) {
-    console.error("토큰이 없거나 잘못되었습니다");
+    console.error("undefined token information");
 
     return res
       .status(err.statusCode || 400)
@@ -21,4 +18,4 @@ const accessToken = async (req, res, next) => {
   }
 };
 
-module.exports = { accessToken };
+module.exports = { loginRequired };
