@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const accessToken = async (req, res, next) => {
+const loginRequired = async (req, res, next) => {
   const token = req.headers.authorization;
   if (!token) {
     console.error("토큰이 없거나 잘못되었습니다");
@@ -18,4 +18,4 @@ const accessToken = async (req, res, next) => {
 };
 
 
-module.exports = { accessToken };
+module.exports = {loginRequired};

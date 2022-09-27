@@ -3,7 +3,7 @@ const router = require("express").Router();
 const { userController } = require("../controllers");
 const { uploadFiles } = require("../middlewares");
 const { upload } = require("../middlewares");
-const { accessToken } = require("../middlewares");
+const { loginRequired } = require("../middlewares");
 
 router
   .route("/signup")
@@ -15,6 +15,6 @@ router
 
 router
   .route("/admin")
-  .get(accessToken, userController.getAdmin);
+  .get(loginRequired, userController.getAdmin);
 
 module.exports = router;

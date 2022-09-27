@@ -3,15 +3,15 @@ const router = require("express").Router();
 const { storeController } = require("../controllers");
 const { uploadFiles } = require("../middlewares");
 const { upload } = require("../middlewares");
-const { accessToken } = require("../middlewares");
+const { loginRequired } = require("../middlewares");
 
 router
   .route("/")
-  .post(upload.single("image"), accessToken, storeController.createStore);
+  .post(upload.single("image"), loginRequired, storeController.createStore);
 
 router
   .route("/:storeId")
-  .patch(upload.single("image"), accessToken, storeController.updateStore);
+  .patch(upload.single("image"), loginRequired, storeController.updateStore);
 
   
 

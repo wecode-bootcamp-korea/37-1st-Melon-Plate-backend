@@ -2,7 +2,7 @@ const { uploadFiles } = require("./uploadFiles");
 const { validators } = require("./validators");
 const { catchAsync, globalErrorHandler } = require("./errorHandler");
 const { upload } = require("./multer");
-const { accessToken } = require("./auth");
+const { loginRequired } = require("./auth");
 const { sorter } = require ("./sorter");
 
 module.exports = {
@@ -11,6 +11,6 @@ module.exports = {
   catchAsync, 
   globalErrorHandler,
   upload,
-  accessToken,
+  loginRequired,
   sorter,
 };

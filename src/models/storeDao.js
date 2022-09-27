@@ -47,6 +47,7 @@ const createStore = async (
 
 
 const makeOffday = async (day_id, store_id) => {
+  console.log(day_id)
   await database.query(
     `INSERT INTO off_days(
     day_id,
