@@ -3,7 +3,7 @@ const { catchAsync } = require("../middlewares");
 
 const postNewReview = catchAsync(async (req, res, next) => {
   const {
-    body: { text, rate, reviewImg },
+    body: { text, rate },
     files, file,
     params: { storeId },
   } = req;
@@ -16,8 +16,8 @@ const postNewReview = catchAsync(async (req, res, next) => {
   // let img = JSON.stringify(reviewImg);
   console.log(files);
   console.log(file);
-  console.log(reviewImg);
-  console.log([reviewImg]);
+  console.log([...req.reviewImg]);
+  console.log([...reviewImg]);
   console.log(req.body);
   // console.log(img);
   
