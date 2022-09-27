@@ -4,9 +4,8 @@ const accessToken = async (req, res, next) => {
   try {
       const token = req.headers.authorization;
       const access = jwt.verify(token, process.env.KEY)
-      const {id,user_id,adminTF} = access
+      const {id,adminTF} = access
       req.id = id
-      req.user_id = user_id
       req.admin = adminTF
       return next();
   } 
