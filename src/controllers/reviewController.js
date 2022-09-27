@@ -3,28 +3,35 @@ const { catchAsync } = require("../middlewares");
 
 const postNewReview = catchAsync(async (req, res, next) => {
   const {
-    body: { userId, nickname, password, age, gender },
-    file,
+    body: { text, rate },
+    files,
+    params: { storeId },
   } = req;
 
-  let profileImg = (file) ? file.path : "NULL";
-
-  if (!userId || !nickname || !password || !age) {
-    const error = new Error("Please write your Info");
+  if ( !storeId || !text || !rate ) {
+    const error = new Error("Please write your comments");
     error.statusCode = 400;
     throw error;
   }
-  
-  await reviewService.postNewReview(
-    userId,
-    nickname,
-    gender,
-    password,
-    profileImg,
-    age
+
+  let imgArr = files ? new Array() : "";
+
+  for (let i in files) imgArr.push(files[i].path);
+
+  let imgJSON = JSON.stringify(imgArr);
+
+  const result = await reviewService.postNewReview(
+    +storeId,
+    +id,
+    +rate,
+    text,
+    imgJSON
   );
 
-  res.status(201).json({ message: `Welcome ${nickname}!` });
+  res.status(200).json({
+    message: "THANKS!",
+    data: result,
+  });
 });
 
 module.exports = {

@@ -2,9 +2,10 @@ const router = require("express").Router();
 
 const { reviewController } = require("../controllers");
 const { uploadFiles } = require("../middlewares");
+const { accessToken } = require("../middlewares");
 
 router
-  .route("/new")
-  .post(uploadFiles.single("profileImg"), reviewController.postNewReivew);
+  .route("/new/:storeId")
+  .post(uploadFiles.array("reviewImg", 10), accessToken, reviewController.postNewReview);
 
 module.exports = router;
