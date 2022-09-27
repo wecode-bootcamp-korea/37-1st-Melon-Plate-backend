@@ -1,17 +1,17 @@
 const { reviewDao } = require("../models");
 
 const postNewReview = async (
-  id,
+  // id,
   storeId,
-  text,
   rate,
+  text,
   imgJSON
 ) => {
   return await reviewDao.createReview(
-    id,
+    // id,
     storeId,
-    text,
     rate,
+    text,
     imgJSON
   );
 };

@@ -6,6 +6,6 @@ const { accessToken } = require("../middlewares");
 
 router
   .route("/new/:storeId")
-  .post(uploadFiles.array("reviewImg", 10), accessToken, reviewController.postNewReview);
+  .post(uploadFiles.array("reviewImg", 10), reviewController.postNewReview);
 
 module.exports = router;
