@@ -41,7 +41,7 @@ const createUser = async (
   return result;
 };
 
-const signIn = async ( userId ) => {
+const getUserById = async ( userId ) => {
   try {
       const [user] = await database.query(
           `SELECT
@@ -72,5 +72,5 @@ const getAdmin = async (userId) => {
 }
 
 module.exports = {
-  createUser, signIn, getAdmin,
+  createUser, getUserById, getAdmin,
 };
