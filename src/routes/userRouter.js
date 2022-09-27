@@ -17,4 +17,9 @@ router
   .route("/admin")
   .get(loginRequired, userController.getAdmin);
 
+router
+  .route("/profile")
+  .get(loginRequired, userController.getProfile)
+
+
 module.exports = router;

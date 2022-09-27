@@ -57,6 +57,7 @@ const getAdmin = async (id) => {
   const result = await userDao.getAdminUser(id);
   const getRateAverage = await userDao.getRateAverage();
   const getOffdays = await userDao.getOffdays();
+
   for (i in getRateAverage) {
     for (j in result) {
       if (getRateAverage[i].id == result[j].id) {
@@ -64,12 +65,13 @@ const getAdmin = async (id) => {
       }
     }
   }
+
   for (k in result) {
     if (!result[k].rate) {
       result[k].rate = 0;
     }
   }
-  // console.log(getOffdays)
+
   for (i in result) {
     result[i].closed_day = "";
   }
@@ -85,8 +87,13 @@ const getAdmin = async (id) => {
   return result;
 };
 
+const getProfile = async (id) => {
+
+}
+
 module.exports = {
   getUserSignUp,
   signIn,
   getAdmin,
+  getProfile
 };

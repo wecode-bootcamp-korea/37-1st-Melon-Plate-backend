@@ -109,6 +109,23 @@ const getOffdays = async () => {
   return result;
 }
 
+const getProfileById = async (id) => {
+  const result = await database.query(
+    `SELECT 
+  user_id, 
+  nickname, 
+  age, 
+  gender, 
+  profile_image, 
+  create_at 
+  FROM users 
+  WHERE users.id=?
+  `,
+    [id]
+  );
+}
+
+
 module.exports = {
-  createUser, getUserById, getAdminUser, getRateAverage, getOffdays,
+  createUser, getUserById, getAdminUser, getRateAverage, getOffdays, getProfileById
 };

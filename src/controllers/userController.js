@@ -57,8 +57,26 @@ const getAdmin = catchAsync(async (req, res, next) => {
  return res.status(200).json(result);
 });
 
+
+const getProfile = catchAsync(async (req, res, next) => {
+  const { id } = req;
+  const userId = id
+  
+  
+  if (!id) {
+    const err = new Error("REQIRE_USER_LOGIN");
+    err.statusCode = 400;
+    throw err;
+  }
+  
+  const result = await userService.getProfile(id);
+ 
+ return res.status(200).json(result);
+});
+
 module.exports = {
   getUserSignUp,
   signIn,
   getAdmin,
+  getProfile
 };
