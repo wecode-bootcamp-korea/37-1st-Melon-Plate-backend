@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 const accessToken = async (req, res, next) => {
   const token = req.headers.authorization;
-  if (!token) {
+    if (!token) {
     console.error("토큰이 없거나 잘못되었습니다");
     return res
       .status(err.statusCode || 400)

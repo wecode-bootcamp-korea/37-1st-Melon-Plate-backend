@@ -8,5 +8,5 @@ const { accessToken } = require("../middlewares");
 router
   .route("/:storeId")
   .get(accessToken, detailController.getStore);
-  
+ 
 module.exports = router;
