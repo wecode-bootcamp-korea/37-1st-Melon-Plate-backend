@@ -1,6 +1,7 @@
 const database = require("./dataSource");
 
 const getSearchResult = async (query, filter, price, location, category) => {
+  console.log(query, filter, price, location, category);
   const result = await database.query(
     `
    SELECT DISTINCT
@@ -8,6 +9,7 @@ const getSearchResult = async (query, filter, price, location, category) => {
       stores.address,
       stores.name,
       stores.image,
+      stores.price_range,
       stores.view_count AS views_count,
       COUNT(reviews.store_id) AS reviews_count,
       FORMAT(AVG(reviews.rate),2) AS rate_average,
@@ -21,12 +23,14 @@ const getSearchResult = async (query, filter, price, location, category) => {
     ON menus.store_id = stores.id
    WHERE stores.address LIKE ("%"?"%")
     OR stores.name LIKE ("%"?"%") 
-    OR categories.category LIKE ("%"?"%")
     OR menus.store_id = stores.id AND menus.name LIKE ("%"?"%")
-   GROUP BY stores.id, categories.category
-   ORDER BY rate_average desc
+    OR categories.category LIKE ("%"?"%")
+    AND stores.address LIKE ("%"?"%")
+    AND categories.category LIKE ("%"?"%")
+   GROUP BY stores.id
+   ORDER BY ${filter} desc
       `,
-    [query, query, query, query]
+    [query, query, query, query, location, category]
   );
 
   return result;
