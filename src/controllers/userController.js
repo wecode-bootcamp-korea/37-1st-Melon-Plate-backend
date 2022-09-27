@@ -7,7 +7,7 @@ const getUserSignUp = catchAsync(async (req, res, next) => {
     file,
   } = req;
 
-  let profileImg = file ? file.path : NULL;
+  let profileImg = file ? file.location : NULL;
 
   if (!userId || !nickname || !password || !age) {
     const error = new Error("Please write your Info");
@@ -30,7 +30,7 @@ const getUserSignUp = catchAsync(async (req, res, next) => {
 const signIn = catchAsync(async (req, res, next) => {
     const { userId, password } = req.body;
     if (!userId || !password) {
-    const err = new Error("아이디나 비밀번호가 입력되지않았습니다");
+    const err = new Error("CONFIRM INPUT ID OR PASSWORD");
     err.statusCode = 400;
     throw err;
   }
@@ -39,9 +39,9 @@ const signIn = catchAsync(async (req, res, next) => {
 });
 
 const getAdmin = catchAsync(async (req, res, next) => {
-  let { admin, userId, user_id } = req.body;
+   let { admin, id } = req;
   if (!admin) {
-    const err = new Error("관리자 계정 로그인이 필요합니다");
+    const err = new Error("CONFIRM ADMIN_USER LOGIN");
     err.statusCode = 400;
     throw err;
   }
