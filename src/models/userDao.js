@@ -41,17 +41,16 @@ const createUser = async (
   return result;
 };
 
-const getUserById = async (userId) => {
+const getUserById = async ( userId ) => {
   try {
     const [user] = await database.query(
       `SELECT
               *
           FROM users
           WHERE user_id = ? `,
-      [userId]
-    );
-    console.log("유저===========", user);
-    return user;
+          [userId]
+      );
+      return user;
   } catch (err) {
     const error = new Error(`INVALID_DATA_INPUT`);
     error.statusCode = 500;
@@ -60,7 +59,7 @@ const getUserById = async (userId) => {
 };
 
 const getAdminUser = async (userId) => {
-   const result = await database.query(
+  const result = await database.query(
     `SELECT              
     stores.id, 
     stores.name, 
@@ -76,16 +75,12 @@ const getAdminUser = async (userId) => {
     FROM stores         
     JOIN users ON users.id = stores.admin_user_id
     WHERE users.id = ?
-
-
-     `,
+        `,
     [userId]
   );
   return result;
 };
 
 module.exports = {
-  createUser,
-  getUserById,
-  getAdminUser,
+  createUser, getUserById, getAdminUser,
 };

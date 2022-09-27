@@ -49,6 +49,7 @@ const signIn = async ( userId, password ) => {
     admin : user.admin
 }
 }
+
 const getAdmin = async (id) => {
   const result = await userDao.getAdminUser(id);
   return result
@@ -58,3 +59,4 @@ const getAdmin = async (id) => {
 module.exports = {
   getUserSignUp, signIn, getAdmin,
 };
+

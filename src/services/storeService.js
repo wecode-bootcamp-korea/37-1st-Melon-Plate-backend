@@ -79,19 +79,17 @@ const updateStore = async (
 
     closed_day_id *= 1;
     const offDay = closed_day_id.toString(2).padStart(7, 0);
-    console.log(closed_day_id.toString(2));
-    console.log(offDay);
 
-    let day = async (store_id) => {
-      if (closed_day_id != "NULL") {
-        for (i in offDay) {
-          if (offDay[i] == "1") {
-            await storeDao.makeOffday(7 - i, store_id);
-          }
+  let day = async (store_id) => {
+    if (closed_day_id != "NULL") {
+      for (i in offDay) {
+        if (offDay[i] == "1") {
+          await storeDao.makeOffday(7 - i, store_id);
         }
       }
-    };
-    await day(store_id);
+    }
+  };
+  await day(store_id);
 
 
     let modifyStore = await storeDao.updateStore(

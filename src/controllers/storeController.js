@@ -56,7 +56,7 @@ const updateStore = catchAsync(async (req, res, next) => {
       closed_time,
       closed_day_id,
       category_id,
-    }, 
+    },
     params: { storeId },
     file,
     id,

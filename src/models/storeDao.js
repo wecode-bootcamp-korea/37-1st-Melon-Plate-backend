@@ -38,7 +38,6 @@ const createStore = async (
       ]
     );
   } catch (err) {
-    console.log(err);
     const error = new Error("INVALID_DATA_INPUT");
     error.statusCode = 500;
     throw error;
@@ -81,7 +80,7 @@ const updateStore = async (
   id,
   store_id
 ) => {
-  console.log(name, store_id);
+
   await database.query(
     `UPDATE stores
       SET name=?, 

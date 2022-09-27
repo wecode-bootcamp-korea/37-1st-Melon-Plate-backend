@@ -1,9 +1,17 @@
 const jwt = require("jsonwebtoken");
 
 const loginRequired = async (req, res, next) => {
-  const token = req.headers.authorization;
-  if (!token) {
-    console.error("토큰이 없거나 잘못되었습니다");
+  try {
+      const token = req.headers.authorization;
+      const access = jwt.verify(token, process.env.KEY)
+      const {id,adminTF} = access
+      req.id = id
+      req.admin = adminTF
+      return next();
+  } 
+  catch (err) {
+    console.error("undefined token information");
+
     return res
       .status(err.statusCode || 400)
       .json({ message: "DO_NOT_HAVE_TOKEN" });
@@ -17,5 +25,4 @@ const loginRequired = async (req, res, next) => {
   return next();
 };
 
-
-module.exports = {loginRequired};
+module.exports = { loginRequired };

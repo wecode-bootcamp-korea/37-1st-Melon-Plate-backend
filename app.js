@@ -19,7 +19,6 @@ app.use(routes);
 app.use("/uploads", express.static("uploads"));
 
 app.get("/ping", (req, res, next) => {
-  console.log(req.query);
   res.status(200).json({ message: "pong" });
 });
 
@@ -28,7 +27,8 @@ app.all("*", (req, res, next) => {
 
   err.statusCode = 404;
 
-  res.status(statusCode).send("");
+  res.status(statusCode).send({message: `Can't fine ${req.originalUrl} on this server or your ${req.method} method is incorrect!`});
+
   next(err);
 });
 
