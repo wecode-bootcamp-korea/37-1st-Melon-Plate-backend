@@ -36,33 +36,27 @@ const getUserSignUp = async (
 };
 
 const signIn = async ( userId, password ) => {
-  const user = await userDao.signIn(userId);
-  const checkHash = async (password, hashedPassword) => {
-      return await bcrypt.compare(password, hashedPassword);
-  }
-
-  const checkPassword = await checkHash(password, user.password);
-  if(!checkPassword) {
-      const err = new Error(`유저 정보가 일치하지 않습니다.`);
+  const user = await userDao.getUserById(userId);
+  isMatched = await bcrypt.compare(password, user.password);
+ if(!isMatched) {
+      const err = new Error(`user information not undefiened.`);
       err.statusCode = 400; 
       throw err;
   }
-    const JWT_KEY = process.env.KEY;
-    
-  const jwtToken = jwt.sign({id:user.id, user_id:user.user_id, admin:user.admin}, JWT_KEY);
-  const result = {
-      accessToken : jwtToken,
-      admin : user.admin
-       }
-  return result
+  const jwtToken = jwt.sign({id:user.id, user_id:user.user_id, admin:user.admin}, process.env.KEY);
+  return {
+    accessToken : jwtToken,
+    admin : user.admin
+}
 }
 
-const getAdmin = async (userId) => {
-  const result = await userDao.getAdmin(userId);
-  return 
+const getAdmin = async (id) => {
+  const result = await userDao.getAdminUser(id);
+  return result
 }
 
 
 module.exports = {
   getUserSignUp, signIn, getAdmin,
 };
+
