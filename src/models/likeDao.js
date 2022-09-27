@@ -14,7 +14,7 @@ const likeEx = async (id, store_id) => {
     return result;
   };
 
-const likeStore = async (id, store_id) => {
+const inputLikeStore = async (id, store_id) => {
   return await database.query(
     `
     INSERT INTO 
@@ -25,7 +25,7 @@ const likeStore = async (id, store_id) => {
   );
 };
 
-const unlikeStore = async (id, store_id) => {
+const undoLikeStore = async (id, store_id) => {
     return await database.query(
       `
       DELETE FROM
@@ -36,4 +36,4 @@ const unlikeStore = async (id, store_id) => {
     );
   };
 
-module.exports = { likeStore,likeEx,unlikeStore };
+module.exports = { inputLikeStore,likeEx,undoLikeStore };
