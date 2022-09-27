@@ -12,14 +12,20 @@ const getSearchResult = async (query, filter, price, location, category) => {
       COUNT(reviews.store_id) AS reviews_count,
       FORMAT(AVG(reviews.rate),2) AS rate_average,
       categories.category
-   FROM stores, categories, menus, reviews
-   WHERE categories.id = stores.category_id AND stores.id = reviews.store_id AND stores.address LIKE ("%"?"%")
-    OR categories.id = stores.category_id AND stores.id = reviews.store_id AND stores.name LIKE ("%"?"%") 
-    OR categories.id = stores.category_id AND stores.id = reviews.store_id AND categories.category LIKE ("%"?"%")
-    OR categories.id = stores.category_id AND stores.id = reviews.store_id AND menus.store_id = stores.id AND menus.name LIKE ("%"?"%")
+   FROM stores
+   INNER JOIN categories
+    ON categories.id = stores.category_id
+   INNER JOIN reviews
+    ON stores.id = reviews.store_id
+   INNER JOIN menus
+    ON menus.store_id = stores.id
+   WHERE stores.address LIKE ("%"?"%")
+    OR stores.name LIKE ("%"?"%") 
+    OR categories.category LIKE ("%"?"%")
+    OR menus.store_id = stores.id AND menus.name LIKE ("%"?"%")
    GROUP BY stores.id, categories.category
    ORDER BY rate_average desc
-   `,
+      `,
     [query, query, query, query]
   );
 
