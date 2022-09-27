@@ -76,7 +76,7 @@ const getAdminUser = async (userId) => {
     JOIN users ON users.id = stores.admin_user_id
     WHERE users.id = ?
         `,
-    [userId]
+    [id]
    
   );
   return result;
