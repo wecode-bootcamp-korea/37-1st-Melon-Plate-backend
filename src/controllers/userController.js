@@ -29,24 +29,30 @@ const getUserSignUp = catchAsync(async (req, res, next) => {
 
 const signIn = catchAsync(async (req, res, next) => {
     const { userId, password } = req.body;
+    
     if (!userId || !password) {
     const err = new Error("CONFIRM INPUT ID OR PASSWORD");
     err.statusCode = 400;
     throw err;
   }
+  
   const result = await userService.signIn(userId, password);
+  
   return res.status(200).json(result);
 });
 
 const getAdmin = catchAsync(async (req, res, next) => {
-   let { admin, id } = req;
+   const { admin, id } = req;
+  
   if (!admin) {
     const err = new Error("CONFIRM ADMIN_USER LOGIN");
     err.statusCode = 400;
     throw err;
   }
+  
   const result = await userService.getAdmin(userId);
-  return res.status(200).json(result);
+ 
+ return res.status(200).json(result);
 });
 
 module.exports = {
