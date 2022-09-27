@@ -42,7 +42,9 @@ const signIn = catchAsync(async (req, res, next) => {
 });
 
 const getAdmin = catchAsync(async (req, res, next) => {
-   const { admin, id } = req;
+  const { admin, id } = req;
+  const userId = id
+  
   
   if (!admin) {
     const err = new Error("CONFIRM ADMIN_USER LOGIN");

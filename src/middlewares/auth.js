@@ -4,9 +4,9 @@ const loginRequired = async (req, res, next) => {
   try {
       const token = req.headers.authorization;
       const access = jwt.verify(token, process.env.KEY)
-      const {id,adminTF} = access
+      const {id,admin} = access
       req.id = id
-      req.admin = adminTF
+      req.admin = admin
       return next();
   } 
   catch (err) {
