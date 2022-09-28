@@ -60,8 +60,7 @@ const getAdmin = catchAsync(async (req, res, next) => {
 
 const getProfile = catchAsync(async (req, res, next) => {
   const { id } = req;
-  const userId = id
-  
+    
   
   if (!id) {
     const err = new Error("REQIRE_USER_LOGIN");
