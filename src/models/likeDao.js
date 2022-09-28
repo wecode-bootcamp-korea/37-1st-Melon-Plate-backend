@@ -1,6 +1,6 @@
 const database = require("./dataSource");
 
-const likeEx = async (id, store_id) => {
+const getLikesByUserIdAndStoreId = async (id, store_id) => {
     let result = await database.query(
       `
       SELECT * FROM 
@@ -36,4 +36,4 @@ const undoLikeStore = async (id, store_id) => {
     );
   };
 
-module.exports = { inputLikeStore,likeEx,undoLikeStore };
+module.exports = { inputLikeStore,getLikesByUserIdAndStoreId,undoLikeStore };
