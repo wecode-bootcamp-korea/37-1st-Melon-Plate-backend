@@ -8,5 +8,9 @@ const { loginRequired } = require("../middlewares");
 router
   .route("/:storeId")
   .get(loginRequired, detailController.getStore);
+
+router
+ .route("/:storeId/reviews")
+ .get(loginRequired, detailController.getReviews);
   
 module.exports = router;

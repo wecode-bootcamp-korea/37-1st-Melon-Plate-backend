@@ -11,16 +11,7 @@ const getStore = async (id,store_id)=> {
     A.menu = B 
    ////////////////////////// 
     
-    let reviewImage=[];
-   for (i in D) {
-    reviewImage.push(D[i].image);
-  }
-  for (i in C) {
-    id = C[i].id;
-    if (C[id] !== undefined) {
-      C[i].image = reviewImage;
-    } 
-  }
+
    ///////////////////////////
 
    let result = A
@@ -31,6 +22,23 @@ const getStore = async (id,store_id)=> {
 return result;
 }
 
+
+const getReviews = async(id,store_id)=>{
+  let C = await detailDao.getStoreReviews(store_id);
+  let D = await detailDao.getReviewImages(store_id);
+  let reviewImage=[];
+  for (i in D) {
+   reviewImage.push(D[i].image);
+ }
+ for (i in C) {
+   id = C[i].id;
+   if (C[id] !== undefined) {
+     C[i].image = reviewImage;
+   } 
+ }
+ return C;
+}
+
 module.exports = {
- getStore,
+ getStore, getReviews
   };
