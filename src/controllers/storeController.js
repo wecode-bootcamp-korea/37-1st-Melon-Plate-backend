@@ -86,6 +86,11 @@ const updateStore = catchAsync(async (req, res, next) => {
   res.status(201).json({ message: `${name} updated!` });
 });
 
+
+const getMyStore = catchAsync(async(req,res,next)=>{
+  const params: { storeId }
+})
+
 module.exports = {
   createStore,
   updateStore,
