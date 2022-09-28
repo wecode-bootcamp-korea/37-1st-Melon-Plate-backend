@@ -11,6 +11,7 @@ router
 
 router
  .route("/:storeId/reviews")  
- .get(loginRequired, detailController.getReviews);
+ .get(detailController.getReviews);
   
+ ////임시로 토큰지워둠////
 module.exports = router;
