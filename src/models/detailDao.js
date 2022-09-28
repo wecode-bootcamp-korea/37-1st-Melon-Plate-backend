@@ -38,18 +38,18 @@ const getStoreReviews = async (store_id) => {
   return getStoreReviews;
 };
 
-// const getReviewImages = async (store_id) => {
-//   let getReviewImages = await database.query(
-//     `SELECT reviews.id, 
-//     review_images.image 
-//     FROM reviews 
-//     LEFT JOIN review_images 
-//     ON reviews.id = review_images.review_id where reviews.store_id=? 
-//     AND review_images.id IS NOT NULL;`,
-//     [store_id]
-//   );
-//   return getReviewImages;
-// };
+const getReviewImages = async (store_id) => {
+  let getReviewImages = await database.query(
+    `SELECT reviews.id, 
+    review_images.image 
+    FROM reviews 
+    LEFT JOIN review_images 
+    ON reviews.id = review_images.review_id where reviews.store_id=? 
+    AND review_images.id IS NOT NULL;`,
+    [store_id]
+  );
+  return getReviewImages;
+};
 
 const getStoreMenus = async (store_id) => {
   let getStoreMenus = await database.query(
@@ -67,5 +67,5 @@ module.exports = {
   increseCount,
   getStoreMenus,
   getStoreReviews,
-  // getReviewImages,
+  getReviewImages,
 };
