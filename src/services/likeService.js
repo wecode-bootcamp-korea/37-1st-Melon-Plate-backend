@@ -2,13 +2,13 @@ const { likeDao } = require("../models");
 
 
 const likeStore = async (id,storeId) => {
-let [likeEx] = await likeDao.likeEx(id,storeId)
+let [likeEx] = await likeDao.getLikesByUserIdAndStoreId(id,storeId)
 if (likeEx)  {
-    await likeDao.undoLikeStore(id,storeId)
-    return "가고싶다 삭제되었습니다"
+    await likeDao.deleteLikeToStore(id,storeId)
+    return "like deleted"
 }
-await likeDao.inputLikeStore(id,storeId)
-return "가고싶다 등록되었습니다"
+await likeDao.createLikeToStore(id,storeId)
+return "like created"
 }
 
 module.exports = {likeStore}
