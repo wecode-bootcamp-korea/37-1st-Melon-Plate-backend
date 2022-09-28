@@ -1,12 +1,12 @@
-const { uploadFiles } = require("./uploadFiles");
+const { upload } = require("./multer");
 const { validators } = require("./validators");
 const { catchAsync, globalErrorHandler } = require("./errorHandler");
-const { accessToken } = require("./auth");
+const { loginRequired } = require("./auth");
 
 module.exports = {
-  uploadFiles,
+  upload,
   validators,
-  accessToken,
+  loginRequired,
   catchAsync, 
   globalErrorHandler,
 };

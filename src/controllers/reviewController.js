@@ -1,10 +1,16 @@
 const { reviewService } = require("../services");
 const { catchAsync } = require("../middlewares");
 
+// const getReviewImageLink = catchAsync(async (req, res, next) => {
+//   const { file } = req;
+
+
+// })
+
 const postNewReview = catchAsync(async (req, res, next) => {
   const {
     body: { text, rate },
-    files, file,
+    files,
     params: { storeId },
   } = req;
 
@@ -46,5 +52,6 @@ const postNewReview = catchAsync(async (req, res, next) => {
 });
 
 module.exports = {
+  getReviewImageLink,
   postNewReview,
 };
