@@ -14,7 +14,7 @@ const getLikesByUserIdAndStoreId = async (id, store_id) => {
     return result;
   };
 
-const inputLikeStore = async (id, store_id) => {
+const createLikeToStore  = async (id, store_id) => {
   return await database.query(
     `
     INSERT INTO 
@@ -25,7 +25,7 @@ const inputLikeStore = async (id, store_id) => {
   );
 };
 
-const undoLikeStore = async (id, store_id) => {
+const deleteLikeToStore = async (id, store_id) => {
     return await database.query(
       `
       DELETE FROM
@@ -36,4 +36,4 @@ const undoLikeStore = async (id, store_id) => {
     );
   };
 
-module.exports = { inputLikeStore,getLikesByUserIdAndStoreId,undoLikeStore };
+module.exports = { createLikeToStore ,getLikesByUserIdAndStoreId,deleteLikeToStore };
