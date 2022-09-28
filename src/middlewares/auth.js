@@ -10,8 +10,6 @@ const loginRequired = async (req, res, next) => {
       return next();
   } 
   catch (err) {
-    console.error("undefined token information");
-
     return res
       .status(err.statusCode || 400)
       .json({ message: "DO_NOT_HAVE_TOKEN" });
