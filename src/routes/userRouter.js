@@ -21,5 +21,8 @@ router
   .route("/profile")
   .get(loginRequired, userController.getProfile)
 
+router
+  .route("/profile")
+  .patch(upload.single("profileImg"), loginRequired, userController.updateProfile)
 
 module.exports = router;

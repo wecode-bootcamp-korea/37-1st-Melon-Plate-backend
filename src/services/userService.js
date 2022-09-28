@@ -8,6 +8,7 @@ const {
   validatePassword,
 } = require("../middlewares/validators");
 
+
 const getUserSignUp = async (
   userId,
   nickname,
@@ -88,12 +89,25 @@ const getAdmin = async (id) => {
 };
 
 const getProfile = async (id) => {
+const result = {
+profile : await userDao.getProfileById(id),
+reviews : await userDao.getReviewsById(id),
+likes : await userDao.getLikesById(id)}
 
+return result
 }
+
+const updateProfile = async(nickname,gender,age,profileImg,id) => {
+   
+  validateNickname(nickname)
+  
+  return  await userDao.updateProfile(nickname,gender,age,profileImg,id)
+  }
 
 module.exports = {
   getUserSignUp,
   signIn,
   getAdmin,
-  getProfile
+  getProfile,
+  updateProfile,
 };
