@@ -10,7 +10,7 @@ router
   .get(loginRequired, detailController.getStore);
 
 router
- .route("/:storeId/reviews")
+ .route("/:storeId/reviews")  
  .get(loginRequired, detailController.getReviews);
   
 module.exports = router;
