@@ -27,9 +27,11 @@ app.all("*", (req, res, next) => {
     `Can't fine ${req.originalUrl} on this server or your ${req.method} method is incorrect!`
   );
 
+
   res.status(err.status || 404).send({
     message: `Can't fine ${req.originalUrl} on this server or your ${req.method} method is incorrect!`,
   });
+
 
   next(err);
 });

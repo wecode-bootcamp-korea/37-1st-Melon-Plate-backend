@@ -12,11 +12,13 @@ const createStore = catchAsync(async (req, res, next) => {
       closed_time,
       closed_day_id,
       category_id,
+      food_menu,
     },
     file,
     id,
     user_id,
   } = req;
+
 
   let image = file ? file.location : "NULL";
 
