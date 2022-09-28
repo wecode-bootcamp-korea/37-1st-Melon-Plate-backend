@@ -5,11 +5,7 @@ const { upload } = require("../middlewares");
 const { loginRequired } = require("../middlewares");
 
 router
-  .route("/new/image")
-  .get(upload.array("reviewImg", 10), reviewController.getReviewImageLink);
-
-router
   .route("/new/:storeId")
-  .post(loginRequired, reviewController.postNewReview);
+  .post(upload.array("reviewImg", 10), reviewController.postNewReview);
 
 module.exports = router;
