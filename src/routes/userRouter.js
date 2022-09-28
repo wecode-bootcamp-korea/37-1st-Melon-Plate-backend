@@ -23,6 +23,6 @@ router
 
 router
   .route("/profile")
-  .patch(upload.single("profileImg"), loginRequired, userController.updateProfile)
+  .patch(upload.single("profile_image"), loginRequired, userController.updateProfile)
 
 module.exports = router;

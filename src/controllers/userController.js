@@ -73,7 +73,7 @@ const getProfile = catchAsync(async (req, res, next) => {
 const updateProfile = catchAsync(async (req, res, next) => {
   const { id } = req;
   const { nickname,gender,age } = req.body;
-  console.log(req.file.location)
+
   
   console.log(id,nickname,gender,age)
   let profileImg = req.file ? req.file.location : NULL;
