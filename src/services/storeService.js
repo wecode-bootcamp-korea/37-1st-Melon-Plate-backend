@@ -12,7 +12,8 @@ const createStore = async (
   closed_time,
   closed_day_id,
   image,
-  category_id
+  category_id,
+  food_menu
 ) => {
   const adminTF = await userDao.signIn(user_id).admin;
   async (adminTF) => {
@@ -31,7 +32,8 @@ const createStore = async (
     closed_time,
     id,
     image,
-    category_id
+    category_id,
+    
   );
 
   let store_id = createStore.insertId;
@@ -63,7 +65,8 @@ const updateStore = async (
   closed_day_id,
   image,
   category_id,
-  store_id
+  store_id,
+  food_menu
 ) => {
   let [check] = await storeDao.checkStore(store_id);
   let checkout = check.admin_user_id;
@@ -102,7 +105,8 @@ const updateStore = async (
       image,
       category_id,
       id,
-      store_id
+      store_id,
+      food_menu
     );
     return modifyStore;
   }
