@@ -50,6 +50,7 @@ const signIn = async (userId, password) => {
   return {
     accessToken: jwtToken,
     admin: user.admin,
+    nickname: user.nickname
   };
 };
 

@@ -88,14 +88,16 @@ const updateStore = async (
     menu.push([food_menu[i].name, store_id, food_menu[i].price]);
   }
 
+  console.log("서비스1================================")
   if (checkout !== id) {
     const err = new Error(`ACCESS ONLY STORES ADMIN USER`);
     err.statusCode = 400;
     throw err;
   } else {
     await storeDao.initOffday(store_id);
+    console.log("서비스2================================")
     await storeDao.initMenus(store_id);
-
+    console.log("서비스3================================")
     closed_day_id *= 1;
     const offDay = closed_day_id.toString(2).padStart(7, 0);
 
@@ -103,6 +105,7 @@ const updateStore = async (
       if (closed_day_id != "NULL") {
         for (i in offDay) {
           if (offDay[i] == "1") {
+            console.log("서비스4================================")
             await storeDao.makeOffday(7 - i, store_id);
           }
         }
@@ -111,12 +114,14 @@ const updateStore = async (
 
     let menuPush = async (menu) => {
       if (food_menu != "NULL") {
+        console.log("서비스5================================")
         await storeDao.createMenu(menu);
       }
     };
+    console.log("서비스6================================")
     await menuPush(menu);
     await day(store_id);
-
+    console.log("서비스7================================")
     let modifyStore = await storeDao.updateStore(
       name,
       description,

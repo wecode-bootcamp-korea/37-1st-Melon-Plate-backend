@@ -76,6 +76,7 @@ const updateStore = async (
   id,
   store_id
 ) => {
+  console.log("===============err",name,description,address,tel,open_time,closed_time,image,category_id,id,store_id)
   await database.query(
     `UPDATE stores
       SET name=?, 
@@ -125,7 +126,8 @@ const getInfoBeforeUpdate = async (store_id) => {
       closed_time,
       admin_user_id,
       image,
-      category_id
+      category_id,
+      price_range
       FROM stores WHERE id = ?
 `,[store_id]
   );
