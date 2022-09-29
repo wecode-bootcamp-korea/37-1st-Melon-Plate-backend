@@ -15,5 +15,5 @@ router
 
 router
   .route("/:storeId")
-  .get(loginRequired, storeController.getMyStore)
+  .get(loginRequired, storeController.getInfoBeforeUpdate)
 module.exports = router;

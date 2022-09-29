@@ -54,12 +54,26 @@ const updateStore = catchAsync(async (req, res, next) => {
       closed_time,
       closed_day_id,
       category_id,
+      food_menu,
     },
     params: { storeId },
     file,
     id,
     user_id,
   } = req;
+  console.log("=============",
+  name,
+    description,
+    address,
+    tel,
+    open_time,
+    closed_time,
+    closed_day_id,
+    category_id, 
+    food_menu,
+
+
+    "=================")
   let store_id = storeId;
 
   let image = file ? file.location : "NULL";
@@ -87,11 +101,20 @@ const updateStore = catchAsync(async (req, res, next) => {
 });
 
 
-const getMyStore = catchAsync(async(req,res,next)=>{
-  const params: { storeId }
+const getInfoBeforeUpdate = catchAsync(async(req,res,next)=>{
+    const store_id = req.params.storeId
+    const {id} = req
+    if (!id || !store_id) {
+      const error = new Error("CHEACK YOUR TOKEN OR URL");
+      error.statusCode = 400;
+      throw error;
+    }
+   let result = await storeService.getInfoBeforeUpdate(id,store_id)
+   res.status(200).json(result)
 })
 
 module.exports = {
   createStore,
   updateStore,
+  getInfoBeforeUpdate,
 };

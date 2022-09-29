@@ -70,7 +70,7 @@ const updateStore = async (
 
 
   if (checkout !== id) {
-
+   const err = new Error(`ACCESS ONLY STORES ADMIN USER`);
     err.statusCode = 400;
     throw err;
   } else {
@@ -106,6 +106,20 @@ const updateStore = async (
     );
     return modifyStore;
   }
+
 };
 
-module.exports = { createStore, updateStore };
+const getInfoBeforeUpdate = async(id, store_id) => {
+  let [check] = await storeDao.checkStore(store_id);
+  let checkout = check.admin_user_id;
+  console.log("=========", checkout, id )
+  if (checkout !== id) {
+    const err = new Error(`ACCESS ONLY STORES ADMIN USER`);
+     err.statusCode = 400;
+     throw err; 
+   } else {
+ return await storeDao.getInfoBeforeUpdate(store_id)
+   }
+}
+
+module.exports = { createStore, updateStore, getInfoBeforeUpdate };
