@@ -76,19 +76,6 @@ const updateStore = async (
   id,
   store_id
 ) => {
-  console.log(
-    "===============err",
-    name,
-    description,
-    address,
-    tel,
-    open_time,
-    closed_time,
-    image,
-    category_id,
-    id,
-    store_id
-  );
   await database.query(
     `UPDATE stores
       SET name=?, 

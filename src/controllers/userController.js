@@ -30,8 +30,6 @@ const getUserSignUp = catchAsync(async (req, res, next) => {
 
 const signIn = catchAsync(async (req, res, next) => {
     const { userId, password } = req.body;
-    console.log(req.body)
-    console.log(userId, password)
     if (!userId || !password) {
     const err = new Error("CONFIRM INPUT ID OR PASSWORD");
     err.statusCode = 400;

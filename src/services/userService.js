@@ -50,7 +50,7 @@ const signIn = async (userId, password) => {
   return {
     accessToken: jwtToken,
     admin: user.admin,
-    nickname: user.nickname
+    nickname: user.nickname,
   };
 };
 
@@ -70,7 +70,7 @@ const getAdmin = async (id) => {
       result[k].rate = 0;
     }
   }
-  // console.log(getOffdays)
+
   for (i in result) {
     result[i].closed_day = "";
   }
