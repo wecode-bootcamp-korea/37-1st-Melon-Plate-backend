@@ -1,56 +1,43 @@
 const database = require("./dataSource");
 
-const getTheNumberOfReviews = async () => {
-  const result = await database.query(
-    `
-    SELECT
-      stores.id,
-      COUNT(store_id) AS reviews_count
-    FROM reviews
-    JOIN stores ON reviews.store_id=stores.id
-    GROUP BY stores.id 
-    `
-  );
-  return result;
-};
+const getSearchResult = async (query, filter, price, location, category) => {
+  const priceRange = (price) ? (`stores.price_range between ${price} and 5 AND`) : "";
+  const orderBy = (filter) ? (`ORDER BY ${filter} desc`) : "";
 
-const getRateAverage = async () => {
-  const result = await database.query(
-    `
-    SELECT
-      stores.id,
-      FORMAT(AVG(rate),2) AS rate_average
-    FROM reviews
-    JOIN stores ON reviews.store_id=stores.id
-    GROUP BY stores.id 
-    `
-  );
-  return result;
-};
-
-const getSearchResult = async (query) => {
   const result = await database.query(
     `
    SELECT DISTINCT
-    stores.id,
-    stores.address,
-    stores.name,
-    stores.image,
-    categories.category
-   FROM stores, categories, menus
-   WHERE categories.id = stores.category_id AND stores.address LIKE ("%"?"%")
-   OR categories.id = stores.category_id AND stores.name LIKE ("%"?"%") 
-   OR categories.id = stores.category_id AND categories.category LIKE ("%"?"%")
-   OR categories.id = stores.category_id AND menus.store_id = stores.id AND menus.name LIKE ("%"?"%")
+      stores.id,
+      stores.address,
+      stores.name,
+      stores.image,
+      stores.price_range,
+      stores.view_count AS views_count,
+      COUNT(reviews.store_id) AS reviews_count,
+      FORMAT(AVG(reviews.rate),2) AS rate_average,
+      categories.category
+   FROM stores
+   INNER JOIN categories
+    ON categories.id = stores.category_id
+   INNER JOIN reviews
+    ON stores.id = reviews.store_id
+   INNER JOIN menus
+    ON menus.store_id = stores.id
+   WHERE ${priceRange} stores.address LIKE ("%"?"%")
+    OR stores.name LIKE ("%"?"%") 
+    OR menus.store_id = stores.id AND menus.name LIKE ("%"?"%")
+    OR categories.category LIKE ("%"?"%")
+   AND stores.address LIKE ("%"?"%")
+   AND categories.category LIKE ("%"?"%")
+   GROUP BY stores.id
+   ${orderBy}
    `,
-    [query, query, query, query]
-  );
-
-  return result;
-};
-
+   [query, query, query, query, location, category]
+   );
+   
+   return result;
+  };
+  
 module.exports = {
-  getRateAverage,
-  getTheNumberOfReviews,
   getSearchResult,
 };
