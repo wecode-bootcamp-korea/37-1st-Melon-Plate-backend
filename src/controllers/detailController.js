@@ -16,8 +16,8 @@ const getStore = catchAsync(async (req, res, next) => {
 })
 
 const getReviews = catchAsync(async (req, res, next) => {
-    
-  const id = "5"
+  
+    const {id} = req  
   let {storeId} = req.params
   let result = await detailService.getReviews(
       id,
