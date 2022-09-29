@@ -2,15 +2,19 @@ const { mainService } = require("../services");
 const { catchAsync } = require("../middlewares");
 
 const getSearchResult = catchAsync(async (req, res, next) => {
-  const { query, filter, price, location, category } = req.query;
+  const { query, filter, price, location, category, menu, limit, offDay } = req.query;
 
   const result = await mainService.getSearchResult(
     query,
     filter,
-    price,
+    +price,
     location,
-    category
+    category, 
+    menu, 
+    offDay,
+    +limit,
   );
+  // console.log(typeof limit );
 
   return res.status(200).json({
     message: `query '${query}' result`,
