@@ -1,7 +1,6 @@
 const router = require("express").Router();
 
 const { storeController } = require("../controllers");
-const { uploadFiles } = require("../middlewares");
 const { upload } = require("../middlewares");
 const { loginRequired } = require("../middlewares");
 

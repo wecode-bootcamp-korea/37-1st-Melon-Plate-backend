@@ -23,11 +23,15 @@ app.get("/ping", (req, res, next) => {
 });
 
 app.all("*", (req, res, next) => {
-  const err = new Error(`Can't fine ${req.originalUrl} on this server!`);
+  const err = new Error(
+    `Can't fine ${req.originalUrl} on this server or your ${req.method} method is incorrect!`
+  );
 
-  err.statusCode = 404;
 
-  res.status(statusCode).send({message: `Can't fine ${req.originalUrl} on this server or your ${req.method} method is incorrect!`});
+  res.status(err.status || 404).send({
+    message: `Can't fine ${req.originalUrl} on this server or your ${req.method} method is incorrect!`,
+  });
+
 
   next(err);
 });

@@ -18,7 +18,7 @@ const createStore = async (
   const adminTF = await userDao.getUserById(user_id).admin;
   async (adminTF) => {
     if (!adminTF) {
-      const err = new Error(`NOT ADMIN USER`);
+      const err = new Error(`NOT_ADMIN_USER`);
       err.statusCode = 400;
       throw err;
     }

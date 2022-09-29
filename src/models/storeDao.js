@@ -76,7 +76,19 @@ const updateStore = async (
   id,
   store_id
 ) => {
-  console.log("===============err",name,description,address,tel,open_time,closed_time,image,category_id,id,store_id)
+  console.log(
+    "===============err",
+    name,
+    description,
+    address,
+    tel,
+    open_time,
+    closed_time,
+    image,
+    category_id,
+    id,
+    store_id
+  );
   await database.query(
     `UPDATE stores
       SET name=?, 
@@ -129,10 +141,10 @@ const getInfoBeforeUpdate = async (store_id) => {
       category_id,
       price_range
       FROM stores WHERE id = ?
-`,[store_id]
+`,
+    [store_id]
   );
 };
-
 
 const getMenusBeforeUpdate = async (store_id) => {
   return await database.query(
@@ -141,10 +153,10 @@ const getMenusBeforeUpdate = async (store_id) => {
       menus.id AS id,
       menus.price
       FROM menus WHERE store_id = ?
-`,[store_id]
+`,
+    [store_id]
   );
 };
-
 
 const createMenu = async (menuInput) => {
   await database.query(
@@ -158,15 +170,14 @@ const createMenu = async (menuInput) => {
   );
 };
 
-const initMenus= async(store_id) => {
+const initMenus = async (store_id) => {
   await database.query(
     `DELETE FROM menus
       WHERE store_id=?
     `,
     [store_id]
   );
-}
-
+};
 
 module.exports = {
   createStore,
@@ -177,5 +188,5 @@ module.exports = {
   getInfoBeforeUpdate,
   getMenusBeforeUpdate,
   createMenu,
-  initMenus
+  initMenus,
 };
