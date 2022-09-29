@@ -6,7 +6,7 @@ const { loginRequired } = require("./auth");
 
 
 module.exports = {
-   validators,
+  validators,
   catchAsync, 
   globalErrorHandler,
   upload,

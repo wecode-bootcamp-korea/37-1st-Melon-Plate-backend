@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/wecode-bootcamp-korea/37-1st-Melon-Plate-backend#readme",
   "dependencies": {
+    "aws-sdk": "^2.1225.0",
     "aws-sdk": "^2.1220.0",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
