@@ -4,8 +4,7 @@ const getSearchResult = async (query, filter, price, location, category, menu, o
   const priceRange = (price) ? (`stores.price_range between ${price} and 5 AND`) : "";
   const orderBy = (filter) ? (`ORDER BY ${filter} desc`) : "";
   const limited = (limit) ? (`LIMIT ${limit}`) : "";
-
-  console.log(query, filter, price, location, category, menu, offDay, limit);
+  
   const result = await database.query(
     `
    SELECT DISTINCT
