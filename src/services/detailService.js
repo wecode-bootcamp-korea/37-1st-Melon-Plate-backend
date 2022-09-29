@@ -2,44 +2,44 @@ const { detailDao } = require("../models");
 
 const getStore = async (id, store_id) => {
   let increseCount = await detailDao.increseCount(store_id);
-  let [A] = await detailDao.getStore(id, store_id);
-  let B = await detailDao.getStoreMenus(store_id);
-  let C = await detailDao.getReviewImages(store_id)
+  let [storeInfo] = await detailDao.getStore(id, store_id);
+  let menuInfo = await detailDao.getStoreMenus(store_id);
+  let reviewInfo = await detailDao.getReviewImages(store_id)
   
-    A.menu = B;
+    storeInfo.menu = menuInfo;
     
     let reviewImage = [];
-    for (i in C){
-      reviewImage.push(C[i].reviewImg)
+    for (i in reviewInfo){
+      reviewImage.push(reviewInfo[i].reviewImg)
     }
-    A.reviewImg = reviewImage
-  let result = A;
+    storeInfo.reviewImg = reviewImage
+  let result = storeInfo;
 
   return result;
 };
 
 const getReviews = async (id, store_id) => {
-  let C = await detailDao.getStoreReviews(store_id);
-  let D = await detailDao.getReviewImages(store_id);
+  let reviewInfo = await detailDao.getStoreReviews(store_id);
+  let imageInfo = await detailDao.getReviewImages(store_id);
   let reviewImage = [];
-  if (!C){ 
-  for (i in D) {
-    reviewImage.push({ id: D[i].review_id, reviewImg: D[i].reviewImg });
+  if (!reviewInfo){ 
+  for (i in imageInfo) {
+    reviewImage.push({ id: imageInfo[i].review_id, reviewImg: imageInfo[i].reviewImg });
   }
-  for (i in C) {
-    C[i].reviewImg =[];
+  for (i in reviewInfo) {
+    reviewInfo[i].reviewImg =[];
   }
 
-for ( i in C){
+for ( i in reviewInfo){
   for (j in reviewImage){
-    if (C[i].id == reviewImage[j].id) {
-      C[i].reviewImg.push(reviewImage[j].reviewImg)
+    if (reviewInfo[i].id == reviewImage[j].id) {
+      reviewInfo[i].reviewImg.push(reviewImage[j].reviewImg)
     }
   }
 }
 
-  C[0].reviewCount = C.length
-  return C;
+  reviewInfo[0].reviewCount = reviewInfo.length
+  return reviewInfo;
 }
   return []
 };
