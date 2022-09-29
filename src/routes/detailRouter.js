@@ -11,6 +11,6 @@ router
 
 router
  .route("/:storeId/reviews")  
- .get(loginRequired, detailController.getReviews);
+ .get(detailController.getReviews);
   
 module.exports = router;

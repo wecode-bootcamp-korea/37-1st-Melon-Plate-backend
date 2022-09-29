@@ -22,7 +22,7 @@ const getReviews = async (id, store_id) => {
   let C = await detailDao.getStoreReviews(store_id);
   let D = await detailDao.getReviewImages(store_id);
   let reviewImage = [];
-
+  if (!C){ 
   for (i in D) {
     reviewImage.push({ id: D[i].review_id, reviewImg: D[i].reviewImg });
   }
@@ -37,8 +37,11 @@ for ( i in C){
     }
   }
 }
-  C.unshift({reviewCount : C.length})
+
+  C[0].reviewCount = C.length
   return C;
+}
+  return []
 };
 
 module.exports = {
