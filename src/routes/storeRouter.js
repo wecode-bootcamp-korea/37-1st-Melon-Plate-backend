@@ -12,8 +12,4 @@ router
   .route("/:storeId")
   .patch(upload.single("image"), loginRequired, storeController.updateStore);
 
-  
-
-  
-
 module.exports = router;

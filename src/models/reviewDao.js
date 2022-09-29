@@ -9,7 +9,7 @@ const createReview = async (id, storeId, rate, text) => {
       text, 
       rate
     ) VALUES (?, ?, ?, ?)`,
-    [id, storeId, text, rate]
+    [id, storeId, text, rate
   );
 
   return result.insertId;
