@@ -2,7 +2,7 @@
 CREATE TABLE stores(
     id int not null auto_increment primary key,
     name varchar(100) not null unique key,
-    image varchar(400) not null,
+    image varchar(400) null,
     description varchar(500) not null,
     address varchar(200) not null,
     tel varchar(50) not null,

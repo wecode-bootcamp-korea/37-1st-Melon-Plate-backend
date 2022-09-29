@@ -81,6 +81,33 @@ const getAdminUser = async (userId) => {
   return result;
 };
 
+const getRateAverage = async () => {
+  const result = await database.query(
+    `
+    SELECT
+      stores.id,
+      FORMAT(AVG(rate),2) AS rate_average
+    FROM reviews
+    JOIN stores ON reviews.store_id=stores.id
+    GROUP BY stores.id 
+    `
+  );
+  return result;
+};
+
+const getOffdays = async () => {
+  const result = await database.query(
+    `SELECT
+    stores.id,
+    days.day
+    FROM stores
+    JOIN off_days ON stores.id=off_days.store_id
+    JOIN days ON off_days.day_id = days.id
+    `
+  )
+  return result;
+}
+
 module.exports = {
-  createUser, getUserById, getAdminUser,
+  createUser, getUserById, getAdminUser, getRateAverage, getOffdays,
 };

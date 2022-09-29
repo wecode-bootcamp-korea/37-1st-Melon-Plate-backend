@@ -7,8 +7,8 @@ const getUserSignUp = catchAsync(async (req, res, next) => {
     body: { userId, nickname, password, age, gender, admin },
     file,
   } = req;
-  
-  let profileImg = file ? file.location : NULL;
+
+  let profileImg = file ? file.location : "NULL";
 
   if (!userId || !nickname || !password || !age) {
     const error = new Error("Please write your Info");
@@ -30,12 +30,12 @@ const getUserSignUp = catchAsync(async (req, res, next) => {
 
 const signIn = catchAsync(async (req, res, next) => {
     const { userId, password } = req.body;
-    
     if (!userId || !password) {
     const err = new Error("CONFIRM INPUT ID OR PASSWORD");
     err.statusCode = 400;
     throw err;
   }
+  
   
   const result = await userService.signIn(userId, password);
   
@@ -43,7 +43,9 @@ const signIn = catchAsync(async (req, res, next) => {
 });
 
 const getAdmin = catchAsync(async (req, res, next) => {
-   const { admin, id } = req;
+  const { admin, id } = req;
+  const userId = id
+  
   
   if (!admin) {
     const err = new Error("CONFIRM ADMIN_USER LOGIN");
