@@ -11,7 +11,7 @@ const getSearchResult = catchAsync(async (req, res, next) => {
     location,
     category, 
     menu, 
-    offDay,
+    +offDay,
     +limit,
   );
 
