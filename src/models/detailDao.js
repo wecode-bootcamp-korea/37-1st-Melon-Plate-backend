@@ -1,7 +1,7 @@
 const database = require("./dataSource");
 
 const getStore = async (id, store_id) => {
-  console.log(id, store_id);
+
   let getStore = await database.query(
     `SELECT stores.name, 
     stores.image, 
