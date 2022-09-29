@@ -44,7 +44,6 @@ const createStore = async (
   }
 };
 
-
 const makeOffday = async (day_id, store_id) => {
   await database.query(
     `INSERT INTO off_days(
@@ -56,7 +55,6 @@ const makeOffday = async (day_id, store_id) => {
   );
 };
 
-
 const initOffday = async (store_id) => {
   await database.query(
     `DELETE FROM off_days
@@ -65,7 +63,6 @@ const initOffday = async (store_id) => {
     [store_id]
   );
 };
-
 
 const updateStore = async (
   name,
@@ -79,7 +76,6 @@ const updateStore = async (
   id,
   store_id
 ) => {
-
   await database.query(
     `UPDATE stores
       SET name=?, 
@@ -108,13 +104,66 @@ const updateStore = async (
   );
 };
 
-
 const checkStore = async (store_id) => {
   let checkStore = await database.query(
-    `select * from stores where stores.id=?`,
+    `select 
+    *
+     from stores where stores.id=?`,
     [store_id]
   );
   return checkStore;
+};
+
+const getInfoBeforeUpdate = async (store_id) => {
+  return await database.query(
+    `SELECT 
+      name, 
+      description,
+      address,
+      tel,
+      open_time,
+      closed_time,
+      admin_user_id,
+      image,
+      category_id,
+      price_range
+      FROM stores WHERE id = ?
+`,
+    [store_id]
+  );
+};
+
+const getMenusBeforeUpdate = async (store_id) => {
+  return await database.query(
+    `SELECT 
+      menus.name,
+      menus.id AS id,
+      menus.price
+      FROM menus WHERE store_id = ?
+`,
+    [store_id]
+  );
+};
+
+const createMenu = async (menuInput) => {
+  await database.query(
+    `INSERT INTO menus(
+    name,
+    store_id,
+    price
+  )VALUES ?
+  `,
+    [menuInput]
+  );
+};
+
+const initMenus = async (store_id) => {
+  await database.query(
+    `DELETE FROM menus
+      WHERE store_id=?
+    `,
+    [store_id]
+  );
 };
 
 module.exports = {
@@ -123,4 +172,8 @@ module.exports = {
   initOffday,
   updateStore,
   checkStore,
+  getInfoBeforeUpdate,
+  getMenusBeforeUpdate,
+  createMenu,
+  initMenus,
 };
