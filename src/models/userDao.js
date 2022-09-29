@@ -1,4 +1,4 @@
-const  database = require("./dataSource");
+const database = require("./dataSource");
 
 const createUser = async (
   userId,
@@ -43,8 +43,8 @@ const createUser = async (
 
 const getUserById = async ( userId ) => {
   try {
-      const [user] = await database.query(
-          `SELECT
+    const [user] = await database.query(
+      `SELECT
               *
           FROM users
           WHERE user_id = ? `,
@@ -52,11 +52,11 @@ const getUserById = async ( userId ) => {
       );
       return user;
   } catch (err) {
-      const error = new Error(`INVALID_DATA_INPUT`);
-      error.statusCode = 500;
-      throw error;
+    const error = new Error(`INVALID_DATA_INPUT`);
+    error.statusCode = 500;
+    throw error;
   }
-}
+};
 
 const getAdminUser = async (userId) => {
   const result = await database.query(
@@ -76,11 +76,10 @@ const getAdminUser = async (userId) => {
     JOIN users ON users.id = stores.admin_user_id
     WHERE users.id = ?
         `,
-    [id]
-   
+    [userId]
   );
   return result;
-}
+};
 
 module.exports = {
   createUser, getUserById, getAdminUser,

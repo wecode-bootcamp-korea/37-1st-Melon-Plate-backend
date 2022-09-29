@@ -7,6 +7,7 @@ const getUserSignUp = catchAsync(async (req, res, next) => {
     body: { userId, nickname, password, age, gender, admin },
     file,
   } = req;
+  
   let profileImg = file ? file.location : NULL;
 
   if (!userId || !nickname || !password || !age) {
