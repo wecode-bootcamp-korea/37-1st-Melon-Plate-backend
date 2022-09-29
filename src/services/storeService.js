@@ -84,11 +84,12 @@ const updateStore = async (
   let [check] = await storeDao.checkStore(store_id);
   let checkout = check.admin_user_id;
   let menu = [];
+
   for (i in food_menu) {
     menu.push([food_menu[i].name, store_id, food_menu[i].price]);
   }
-
-  console.log("서비스1================================")
+  
+  console.log("서비스1================================",menu,food_menu)
   if (checkout !== id) {
     const err = new Error(`ACCESS ONLY STORES ADMIN USER`);
     err.statusCode = 400;
@@ -119,9 +120,10 @@ const updateStore = async (
       }
     };
     console.log("서비스6================================")
-    await menuPush(menu);
+    if (food_menu){
+    await menuPush(menu)}
     await day(store_id);
-    console.log("서비스7================================")
+    console.log("서비스7================================",store_id,menu)
     let modifyStore = await storeDao.updateStore(
       name,
       description,

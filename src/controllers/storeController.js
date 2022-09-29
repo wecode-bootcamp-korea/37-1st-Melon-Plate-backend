@@ -64,7 +64,12 @@ const updateStore = catchAsync(async (req, res, next) => {
     id,
     user_id,
   } = req;
-  const food_menu = JSON.parse(req.body.food_menu);
+
+  if (req.food_menu){
+    const food_menu = JSON.parse(req.body.food_menu);
+  }
+ else { const food_menu = "null"}
+
   let store_id = storeId;
 
   let image = file ? file.location : "NULL";
