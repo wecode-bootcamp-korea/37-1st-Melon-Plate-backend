@@ -8,8 +8,8 @@ const createReview = async (id, storeId, rate, text) => {
       store_id, 
       text, 
       rate
-    ) VALUES (1, ?, ?, ?)`,
-    [storeId, text, rate]
+    ) VALUES (?, ?, ?, ?)`,
+    [id,storeId, text, rate]
   );
 
   return result.insertId;
