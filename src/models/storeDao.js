@@ -131,6 +131,41 @@ const getInfoBeforeUpdate = async (store_id) => {
   );
 };
 
+
+const getMenusBeforeUpdate = async (store_id) => {
+  return await database.query(
+    `SELECT 
+      menus.name,
+      menus.id AS id,
+      menus.price
+      FROM menus WHERE store_id = ?
+`,[store_id]
+  );
+};
+
+
+const createMenu = async (menuInput) => {
+  await database.query(
+    `INSERT INTO menus(
+    name,
+    store_id,
+    price
+  )VALUES ?
+  `,
+    [menuInput]
+  );
+};
+
+const initMenus= async(store_id) => {
+  await database.query(
+    `DELETE FROM menus
+      WHERE store_id=?
+    `,
+    [store_id]
+  );
+}
+
+
 module.exports = {
   createStore,
   makeOffday,
@@ -138,4 +173,7 @@ module.exports = {
   updateStore,
   checkStore,
   getInfoBeforeUpdate,
+  getMenusBeforeUpdate,
+  createMenu,
+  initMenus
 };

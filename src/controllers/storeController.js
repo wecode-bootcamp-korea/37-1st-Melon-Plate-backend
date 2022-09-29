@@ -12,13 +12,16 @@ const createStore = catchAsync(async (req, res, next) => {
       closed_time,
       closed_day_id,
       category_id,
-    },
+      },
     file,
     id,
     user_id,
   } = req;
-
+  
   let image = file ? file.location : "NULL";
+  
+  const food_menu = JSON.parse(req.body.food_menu);
+
 
   if (!name || !description || !address || !tel || !category_id) {
     const error = new Error("필수정보를 확인해주세요");
@@ -37,7 +40,8 @@ const createStore = catchAsync(async (req, res, next) => {
     closed_time,
     closed_day_id,
     image,
-    category_id
+    category_id,
+    food_menu
   );
 
   res.status(201).json({ message: `${name} created!` });
@@ -53,27 +57,14 @@ const updateStore = catchAsync(async (req, res, next) => {
       open_time,
       closed_time,
       closed_day_id,
-      category_id,
-      food_menu,
+      category_id
     },
     params: { storeId },
     file,
     id,
     user_id,
   } = req;
-  console.log("=============",
-  name,
-    description,
-    address,
-    tel,
-    open_time,
-    closed_time,
-    closed_day_id,
-    category_id, 
-    food_menu,
-
-
-    "=================")
+  const food_menu = JSON.parse(req.body.food_menu);
   let store_id = storeId;
 
   let image = file ? file.location : "NULL";
