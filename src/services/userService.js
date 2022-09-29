@@ -8,6 +8,7 @@ const {
   validatePassword,
 } = require("../middlewares/validators");
 
+
 const getUserSignUp = async (
   userId,
   nickname,
@@ -58,6 +59,7 @@ const getAdmin = async (id) => {
   const result = await userDao.getAdminUser(id);
   const getRateAverage = await userDao.getRateAverage();
   const getOffdays = await userDao.getOffdays();
+
   for (i in getRateAverage) {
     for (j in result) {
       if (getRateAverage[i].id == result[j].id) {
@@ -65,6 +67,7 @@ const getAdmin = async (id) => {
       }
     }
   }
+
   for (k in result) {
     if (!result[k].rate) {
       result[k].rate = 0;
@@ -86,8 +89,26 @@ const getAdmin = async (id) => {
   return result;
 };
 
+const getProfile = async (id) => {
+const result = {
+profile : await userDao.getProfileById(id),
+reviews : await userDao.getReviewsById(id),
+likes : await userDao.getLikesById(id)}
+
+return result
+}
+
+const updateProfile = async(nickname,gender,age,profileImg,id) => {
+   
+  validateNickname(nickname)
+  
+  return  await userDao.updateProfile(nickname,gender,age,profileImg,id)
+  }
+
 module.exports = {
   getUserSignUp,
   signIn,
   getAdmin,
+  getProfile,
+  updateProfile,
 };

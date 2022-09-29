@@ -41,16 +41,16 @@ const createUser = async (
   return result;
 };
 
-const getUserById = async ( userId ) => {
+const getUserById = async (userId) => {
   try {
     const [user] = await database.query(
       `SELECT
               *
           FROM users
           WHERE user_id = ? `,
-          [userId]
-      );
-      return user;
+      [userId]
+    );
+    return user;
   } catch (err) {
     const error = new Error(`INVALID_DATA_INPUT`);
     error.statusCode = 500;
@@ -104,10 +104,83 @@ const getOffdays = async () => {
     JOIN off_days ON stores.id=off_days.store_id
     JOIN days ON off_days.day_id = days.id
     `
-  )
+  );
   return result;
-}
+};
+
+const getProfileById = async (id) => {
+  const result = await database.query(
+    `SELECT 
+  user_id, 
+  nickname, 
+  age, 
+  gender, 
+  profile_image, 
+  create_at 
+  FROM users 
+  WHERE users.id=?
+  `,
+    [id]
+  );
+  return result;
+};
+
+const getReviewsById = async (id) => {
+  const result = await database.query(
+    `SELECT stores.id AS stores_id, 
+    stores.name, 
+    stores.address, 
+    reviews.text, 
+    reviews.rate 
+    FROM stores 
+    JOIN reviews 
+    ON reviews.store_id=stores.id 
+    JOIN users 
+    ON reviews.user_id = users.id 
+    WHERE users.id=?;
+  `,
+    [id]
+  );
+  return result;
+};
+
+const getLikesById = async (id) => {
+  const result = await database.query(
+    `select 
+    stores.id AS stores_id, 
+    stores.name, 
+    stores.address 
+    from stores 
+    JOIN likes ON likes.store_id=stores.id 
+    JOIN users ON likes.user_id = users.id 
+    WHERE users.id=?
+    `,
+    [id]
+  );
+  return result;
+};
+
+const updateProfile = async (nickname,gender,age,profileImg,id) => {
+  const result = await database.query(
+    `UPDATE users
+    SET nickname=?, 
+    gender=?, 
+    age=?,
+    profile_image=?
+    WHERE id = ? `,
+    [nickname, gender, age, profileImg, id]
+  );
+  return result;
+};
 
 module.exports = {
-  createUser, getUserById, getAdminUser, getRateAverage, getOffdays,
+  createUser,
+  getUserById,
+  getAdminUser,
+  getRateAverage,
+  getOffdays,
+  getProfileById,
+  getLikesById,
+  getReviewsById,
+  updateProfile,
 };

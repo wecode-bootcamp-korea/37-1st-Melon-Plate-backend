@@ -16,4 +16,12 @@ router
   .route("/admin")
   .get(loginRequired, userController.getAdmin);
 
+router
+  .route("/profile")
+  .get(loginRequired, userController.getProfile)
+
+router
+  .route("/profile")
+  .patch(upload.single("profile_image"), loginRequired, userController.updateProfile)
+
 module.exports = router;
