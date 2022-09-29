@@ -2,18 +2,17 @@ const router = require("express").Router();
 
 const { storeController } = require("../controllers");
 const { upload } = require("../middlewares");
-const { loginRequired } = require("../middlewares");
+const { loginRequired, hasAdminPermission } = require("../middlewares");
+
+router.post("/", upload.single("image"), loginRequired, hasAdminPermission, storeController.createStore);
+router.patch("/:storeId",upload.single("image"), loginRequired, hasAdminPermission, storeController.updateStore);
 
 router
-  .route("/")
-  .post(upload.single("image"), loginRequired, storeController.createStore);
+  .route("/seperate")
+  .get(listController.getSeperatedList);
 
 router
-  .route("/:storeId")
-  .patch(upload.single("image"), loginRequired, storeController.updateStore);
-
-  
-
-  
+  .route("/search")
+  .get(mainController.getSearchResult);
 
 module.exports = router;
