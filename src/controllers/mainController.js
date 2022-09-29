@@ -14,7 +14,6 @@ const getSearchResult = catchAsync(async (req, res, next) => {
     offDay,
     +limit,
   );
-  // console.log(typeof limit );
 
   return res.status(200).json({
     message: `query '${query}' result`,
