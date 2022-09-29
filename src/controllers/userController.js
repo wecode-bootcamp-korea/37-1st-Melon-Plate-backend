@@ -51,9 +51,9 @@ const getAdmin = catchAsync(async (req, res, next) => {
     throw err;
   }
   
-  const result = await userService.getAdmin(id);
-  
-  return res.status(200).json(result);
+  const result = await userService.getAdmin(userId);
+ 
+ return res.status(200).json(result);
 });
 
 module.exports = {
