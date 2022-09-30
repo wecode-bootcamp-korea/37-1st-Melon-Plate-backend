@@ -17,7 +17,7 @@
 
 ### 데모 영상(이미지 클릭)
 
-*유투브 영상 링크나 캡쳐 이미지 넣어주세요.*
+![image](https://user-images.githubusercontent.com/109185297/193211583-7351d3ca-4ed3-4a10-be08-7ce8659b12b2.png)
 
 <br>
 
